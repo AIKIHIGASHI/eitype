@@ -7,7 +7,7 @@
 
 <style>
 html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  font-family: "MS Pゴシック","Wawati SC","Comic Sans MS","Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
@@ -20,6 +20,8 @@ html {
 
 body {
   background-color: black;
+  color: rgba(255, 255, 255, 0.600);
+  font-size: 25px;
 }
 
 .container {
@@ -27,8 +29,6 @@ body {
   height: 720px;
   width: 1080px;
   margin: 0 auto;
-  display: flex;
-  justify-content: center;
   align-items: center;
   text-align: center;
   position: relative;
@@ -37,7 +37,7 @@ body {
 .container-bottom {
   background-image: url("~assets/黒板B.png");
   height: 45px;
-  width: 1080px;
+  width: 100%;
   background-color: pink;
   position: absolute;
   bottom: 0;
