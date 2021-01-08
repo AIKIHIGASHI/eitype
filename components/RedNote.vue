@@ -1,35 +1,35 @@
 <template>
   <div>
     <div
-      :class="['note', {slide: redNote}, redNote ? className.noteTransitionB : className.noteTransitionA]"
+      :class="['note', {slide: redNote}, redNote ? classNames.noteTransitionB : classNames.noteTransitionA]"
     >
       <span
-        :class="['cover', {open1: redNote}, redNote ? className.pageTransitionB1 : className.pageTransitionA4]"
+        :class="['cover', {open1: redNote}, redNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4]"
       >
         <h1>{{ title }}</h1>
         <div></div>
         <div></div>
       </span>
       <span
-        :class="['cover-back', {open2: redNote}, redNote ? className.pageTransitionB1 : className.pageTransitionA4]"
+        :class="['cover-back', {open2: redNote}, redNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4]"
       ></span>
       <span
-        :class="['page1', {open3: redNote}, redNote ? className.pageTransitionB2 : className.pageTransitionA3]"
+        :class="['page1', {open3: redNote}, redNote ? classNames.pageTransitionB2 : classNames.pageTransitionA3]"
       >
         <InThePage></InThePage>
       </span>
       <span
-        :class="['page2', {open4: redNote}, redNote ? className.pageTransitionB3 : className.pageTransitionA2]"
+        :class="['page2', {open4: redNote}, redNote ? classNames.pageTransitionB3 : classNames.pageTransitionA2]"
       >
         <InThePage></InThePage>
       </span>
       <span
-        :class="['page3', {open5: redNote}, redNote ? className.pageTransitionB4 : className.pageTransitionA1]"
+        :class="['page3', {open5: redNote}, redNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1]"
       >
         <InThePage></InThePage>
       </span>
       <span
-        :class="['page4' ,{open6: redNote}, redNote ? className.pageTransitionB4 : className.pageTransitionA1]"
+        :class="['page4' ,{open6: redNote}, redNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1]"
       >
         <div class="heading">遊び方</div>
         <div class="row">「<span class="red">英タイプ</span>」は英単語学習型タイピングゲームです。</div>
@@ -50,7 +50,7 @@
         <div class="row">ゲーム終了後に採点結果が表示されます。</div>
       </span>
       <span
-        :class="['rear-cover', {rearCoverAfter: redNote}, redNote ? className.noteTransitionB : className.noteTransitionA]"
+        :class="['rear-cover', {rearCoverAfter: redNote}, redNote ? classNames.noteTransitionB : classNames.noteTransitionA]"
       ></span>
       <div :class="['note-index', {noteShadowInset: redNote}]">
         <div class="close" @click="redNoteOpen()">閉じる</div>
@@ -74,7 +74,7 @@
       </div>
       <div :class="['note-shadow']"></div>
       <div
-        :class="['note-shadow', {noteShadowSlide: redNote}, redNote ? className.pageTransitionB2 : className.noteTransitionA]"
+        :class="['note-shadow', {noteShadowSlide: redNote}, redNote ? classNames.pageTransitionB2 : classNames.noteTransitionA]"
       ></div>
     </div>
   </div>
@@ -90,7 +90,7 @@ export default {
   data() {
     return {
       title: "遊び方",
-      className: {
+      classNames: {
         noteTransitionA: "note-transitionA",
         noteTransitionB: "note-transitionB",
         pageTransitionA1: "page-transitionA1",

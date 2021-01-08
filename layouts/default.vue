@@ -48,7 +48,7 @@ body {
   align-items: center;
   text-align: center;
   position: relative;
-  // overflow: hidden;
+  overflow: hidden;
   .side-box {
     font-size: 30px;
     width: 40px;
