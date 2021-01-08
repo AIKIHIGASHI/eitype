@@ -31,12 +31,13 @@ export default {
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: ['nuxt-webfontloader'],
+  modules: ['nuxt-webfontloader', '@nuxtjs/style-resources'],
   webfontloader: {
     google: {
       families: ['Caveat']
     }
   },
+
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
