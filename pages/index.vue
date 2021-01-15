@@ -1,17 +1,26 @@
 <template>
   <div class="container">
     <div v-for="(image, index) in shuffle" :key="image.id" :class="['img' + index]">
-      <div class="img-text"><span :style="{color: image.color}">{{image.char}}</span>{{image.text}}</div>
+      <div class="img-text">
+        <span :style="{color: image.color}">{{image.char}}</span>
+        {{image.text}}
+      </div>
       <img class="img" :src="image.src" />
     </div>
     <div class="logo">
       <img src="~/assets/images/英タイプロゴ.png" />
     </div>
     <div class="start-message">Spaceでゲームスタート</div>
-    <div class="note-component" :class="[{showNote: redNote}, redNote ? '' : classNames.downNoteTransition]">
+    <div
+      class="note-component"
+      :class="[{showNote: redNote}, redNote ? '' : classNames.downNoteTransition]"
+    >
       <RedNote></RedNote>
     </div>
-    <div class="note-component" :class="[{showNote: blueNote}, blueNote ? '' : classNames.downNoteTransition]">
+    <div
+      class="note-component"
+      :class="[{showNote: blueNote}, blueNote ? '' : classNames.downNoteTransition]"
+    >
       <BlueNote></BlueNote>
     </div>
     <div
@@ -83,7 +92,7 @@ export default {
     };
   },
   created() {
-
+    this.play();
   },
   computed: {
     ...mapGetters("note", [
@@ -101,7 +110,7 @@ export default {
       }
       console.log(images.slice(0, 2))
       return images.slice(0, 3)
-    }
+    },
   },
   methods: {
     ...mapActions("note", [
@@ -110,9 +119,16 @@ export default {
       "yellowNoteOpen",
       "greenNoteOpen",
       "purpleNoteOpen"
-    ])
+    ]),
+    play() {
+      addEventListener('keydown', (e) => {
+        if (e.key === ' ') {
+          this.$router.push('/play');
+        }
+      }) 
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -122,8 +138,6 @@ export default {
   opacity: 0.5;
   cursor: pointer;
 }
-
-
 
 .img-text {
   font-size: 40px;
