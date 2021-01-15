@@ -31,10 +31,32 @@ export default {
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: [
-  ],
+  modules: ['nuxt-webfontloader', '@nuxtjs/style-resources', 'nuxt-fontawesome',],
+  webfontloader: {
+    google: {
+      families: ['Caveat']
+    }
+  },
+
+  fontawesome: {
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      }
+    ]
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    extend(config, ctx) {
+      config.module.rules.push({
+        test: /\.(ogg|mp3|wav|mpe?g)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]'
+        }
+      })
+    }
   }
 }

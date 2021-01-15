@@ -1,20 +1,30 @@
 <template>
-  <div>
+  <div class="container">
     <Nuxt />
+    <div class="side-box">
+      <div>{{ new Date().getMonth() + 1}}月</div>
+      <div>{{ new Date().getDate()}}日</div>
+      <h1></h1>
+      <div>日直</div>{{ name }}
+    </div>
+    <div class="container-bottom"></div>
   </div>
 </template>
 
-<style>
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters('user', ['name']),
+  },
+}
+</script>
+
+<style lang="scss" >
 html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: "MS Pゴシック", "Wawati SC", "Comic Sans MS", "Source Sans Pro",
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -24,39 +34,38 @@ html {
   box-sizing: border-box;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
+body {
+  background-color: black;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 25px;
 }
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+.container {
+  background-image: url("~assets/images/黒板A.png");
+  height: 720px;
+  width: 1080px;
+  margin: 0 auto;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  .side-box {
+    font-size: 30px;
+    width: 40px;
+    height: 600px;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    padding-top: 130px;
+    text-align: center;
+  }
+  .container-bottom {
+    background-image: url("~assets/images/黒板B.png");
+    height: 45px;
+    width: 100%;
+    background-color: pink;
+    position: absolute;
+    bottom: 0;
+  }
 }
 </style>
