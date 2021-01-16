@@ -11,7 +11,7 @@
       <img class="img" :src="image.src" >
     </div>
     <div class="logo">
-      <img src="~/assets/images/英タイプロゴ.png" >
+      <img src="~/assets/images/英タイプロゴ.png" @click="submit()">
     </div>
     <div class="start-message">Spaceでゲームスタート</div>
     <div
@@ -176,11 +176,13 @@ export default {
         const j = Math.floor(Math.random() * (i + 1));
         [images[j], images[i]] = [images[i], images[j]]
       }
-      console.log(images.slice(0, 2))
       return images.slice(0, 3)
     },
   },
   methods: {
+    ...mapActions('firebase', [
+      'submit'
+    ]),
     ...mapActions('note', [
       'redNoteOpen',
       'blueNoteOpen',
@@ -188,6 +190,7 @@ export default {
       'greenNoteOpen',
       'purpleNoteOpen',
     ]),
+
     play() {
       addEventListener('keydown', (e) => {
         if (e.key === ' ') {
