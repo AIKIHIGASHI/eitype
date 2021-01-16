@@ -1,128 +1,137 @@
 <template>
   <div>
     <div
-      :class="['note', {slide: redNote}, redNote ? classNames.noteTransitionB : classNames.noteTransitionA]"
-    >
+      :class="['note', {slide: redNote}, redNote ? classNames.noteTransitionB : classNames.noteTransitionA]">
       <span
-        :class="['cover', {open1: redNote}, redNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4]"
-      >
+        :class="['cover', {open1: redNote}, redNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4]">
         <h1>{{ title }}</h1>
-        <div></div>
-        <div></div>
+        <div />
+        <div />
       </span>
       <span
-        :class="['cover-back', {open2: redNote}, redNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4]"
-      ></span>
+        :class="['cover-back', {open2: redNote}, redNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4]"/>
       <span
-        :class="['page1', {open3: redNote}, redNote ? classNames.pageTransitionB2 : classNames.pageTransitionA3]"
-      >
-        <InThePage></InThePage>
+        :class="['page1', {open3: redNote}, redNote ? classNames.pageTransitionB2 : classNames.pageTransitionA3]">
+        <InThePage />
       </span>
       <span
-        :class="['page2', {open4: redNote}, redNote ? classNames.pageTransitionB3 : classNames.pageTransitionA2]"
-      >
-        <InThePage></InThePage>
+        :class="['page2', {open4: redNote}, redNote ? classNames.pageTransitionB3 : classNames.pageTransitionA2]">
+        <InThePage />
       </span>
       <span
-        :class="['page3', {open5: redNote}, redNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1]"
-      >
-        <InThePage></InThePage>
+        :class="['page3', {open5: redNote}, redNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1]">
+        <InThePage />
       </span>
       <span
-        :class="['page4' ,{open6: redNote}, redNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1]"
-      >
+        :class="['page4' ,{open6: redNote}, redNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1]">
         <div class="heading">遊び方</div>
-        <div class="row">「<span class="red">英タイプ</span>」は英単語学習型タイピングゲームです。</div>
-        <div class="row"></div>
-        <div class="row">☆<span class="red">ルール</span>☆</div>
+        <div class="row">
+          「
+          <span class="red">英タイプ</span>」は英単語学習型タイピングゲームです。
+        </div>
+        <div class="row" />
+        <div class="row">
+          ☆
+          <span class="red">ルール</span>☆
+        </div>
         <div class="row">spaceキーでゲームスタート。</div>
         <div class="row">始まったら画面中央に表示されている英単語を</div>
         <div class="row">キーボードで入力しましょう。</div>
-        <div class="row"></div>
-        <div class="row">☆<span class="red">制限時間</span>☆</div>
+        <div class="row" />
+        <div class="row">
+          ☆
+          <span class="red">制限時間</span>☆
+        </div>
         <div class="row">プレイ画面右上に制限時間が表示されています。</div>
         <div class="row">時間内にたくさん英単語を入力しましょう。</div>
-        <div class="row"></div>
-        <div class="row">☆<span class="red">得点</span>☆</div>
+        <div class="row" />
+        <div class="row">
+          ☆
+          <span class="red">得点</span>☆
+        </div>
         <div class="row">英単語を正しく入力できると10点の得点です。</div>
         <div class="row">１文字でも間違えると得点は無しなので、</div>
         <div class="row">落ち着いて入力しましょう。</div>
         <div class="row">ゲーム終了後に採点結果が表示されます。</div>
       </span>
       <span
-        :class="['rear-cover', {rearCoverAfter: redNote}, redNote ? classNames.noteTransitionB : classNames.noteTransitionA]"
-      ></span>
+        :class="['rear-cover', {rearCoverAfter: redNote}, redNote ? classNames.noteTransitionB : classNames.noteTransitionA]"/>
       <div :class="['note-index', {noteShadowInset: redNote}]">
         <div class="close" @click="redNoteOpen()">閉じる</div>
         <div class="heading">ログイン後</div>
         <div class="row">ログイン後、以下の機能を使用できます。</div>
-        <div class="row"></div>
-        <div class="row"></div>
-        <div class="row">☆<span class="red">単語帳</span>☆</div>
+        <div class="row" />
+        <div class="row" />
+        <div class="row">
+          ☆
+          <span class="red">単語帳</span>☆
+        </div>
         <div class="row">今まで入力された英単語を単語帳に記録できます。</div>
         <div class="row">たくさんプレイして単語帳を完成させましょう。</div>
-        <div class="row"></div>
-        <div class="row"></div>
-        <div class="row"></div>
-        <div class="row">☆<span class="red">ランキング</span>☆</div>
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row">
+          ☆
+          <span class="red">ランキング</span>☆
+        </div>
         <div class="row">各ユーザーの得点のランキングが表示されます。</div>
         <div class="row">高得点を狙ってランキング上位を目指しましょう。</div>
-        <div class="row"></div>
-        <div class="row"></div>
-        <div class="row"></div>
-        <div class="row"></div>
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
       </div>
-      <div :class="['note-shadow']"></div>
+      <div :class="['note-shadow']" />
       <div
-        :class="['note-shadow', {noteShadowSlide: redNote}, redNote ? classNames.pageTransitionB2 : classNames.noteTransitionA]"
-      ></div>
+        :class="['note-shadow', {noteShadowSlide: redNote}, redNote ? classNames.pageTransitionB2 : classNames.noteTransitionA]"/>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-import InThePage from "~/components/InThePage.vue";
+import { mapGetters, mapActions } from 'vuex'
+import InThePage from '~/components/InThePage.vue'
 export default {
   components: {
     InThePage
   },
   data() {
     return {
-      title: "遊び方",
+      title: '遊び方',
       classNames: {
-        noteTransitionA: "note-transitionA",
-        noteTransitionB: "note-transitionB",
-        pageTransitionA1: "page-transitionA1",
-        pageTransitionA2: "page-transitionA2",
-        pageTransitionA3: "page-transitionA3",
-        pageTransitionA4: "page-transitionA4",
-        pageTransitionB1: "page-transitionB1",
-        pageTransitionB2: "page-transitionB2",
-        pageTransitionB3: "page-transitionB3",
-        pageTransitionB4: "page-transitionB4"
+        noteTransitionA: 'note-transitionA',
+        noteTransitionB: 'note-transitionB',
+        pageTransitionA1: 'page-transitionA1',
+        pageTransitionA2: 'page-transitionA2',
+        pageTransitionA3: 'page-transitionA3',
+        pageTransitionA4: 'page-transitionA4',
+        pageTransitionB1: 'page-transitionB1',
+        pageTransitionB2: 'page-transitionB2',
+        pageTransitionB3: 'page-transitionB3',
+        pageTransitionB4: 'page-transitionB4'
       }
-    };
+    }
   },
   computed: {
-    ...mapGetters("note", [
-      "redNote",
-      "blueNote",
-      "yellowNote",
-      "greenNote",
-      "purpleNote"
+    ...mapGetters('note', [
+      'redNote',
+      'blueNote',
+      'yellowNote',
+      'greenNote',
+      'purpleNote'
     ])
   },
   methods: {
-    ...mapActions("note", [
-      "redNoteOpen",
-      "blueNoteOpen",
-      "yellowNoteOpen",
-      "greenNoteOpen",
-      "purpleNoteOpen"
+    ...mapActions('note', [
+      'redNoteOpen',
+      'blueNoteOpen',
+      'yellowNoteOpen',
+      'greenNoteOpen',
+      'purpleNoteOpen'
     ])
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

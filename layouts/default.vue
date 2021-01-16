@@ -4,10 +4,10 @@
     <div class="side-box">
       <div>{{ new Date().getMonth() + 1}}月</div>
       <div>{{ new Date().getDate()}}日</div>
-      <h1></h1>
+      <h1/>
       <div>日直</div>{{ name }}
     </div>
-    <div class="container-bottom"></div>
+    <div class="container-bottom"/>
   </div>
 </template>
 

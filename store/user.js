@@ -10,7 +10,7 @@ export const getters = {
 
 export const mutations = {
   incrementScore(state) {
-    state.score += 10;
+    state.score += 10
   },
   resetScore(state) {
     state.score = 0
@@ -19,9 +19,9 @@ export const mutations = {
 
 export const actions = {
   incrementScore({ commit }) {
-    commit('incrementScore');
+    commit('incrementScore')
   },
   resetScore({ commit }) {
-    commit('resetScore');
+    commit('resetScore')
   }
 }

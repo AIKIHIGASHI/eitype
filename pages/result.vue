@@ -25,7 +25,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><span class="circle" v-if="word.correct"></span><span v-for="(char, index) in word.chars" :key="char.id"><span :class="{wrong: char.wrongChar}">{{ char.char }}</span></span></td>
+                  <td><span class="circle" v-if="word.correct"/><span v-for="char in word.chars" :key="char.id"><span :class="{wrong: char.wrongChar}">{{ char.char }}</span></span></td>
                 </tr>
               </tbody>
             </table>
@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <div></div>
+    <div/>
   </div>
 </template>
 
@@ -53,9 +53,9 @@ export default {
     retry() {
       addEventListener('keydown', (e) => {
         if (e.key === ' ') {
-          this.deleteAnsweredWord();
-          this.resetScore();
-          this.$router.push('/play');
+          this.deleteAnsweredWord()
+          this.resetScore()
+          this.$router.push('/play')
           // location.reload()
         }
       }) 
@@ -134,8 +134,6 @@ section {
           border-color: black;
           width: 24.98%;
           margin-bottom: 20px;
-        }
-        tr {
         }
         th {
           font-size: 12px;

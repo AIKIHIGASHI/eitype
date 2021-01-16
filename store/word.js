@@ -8,7 +8,7 @@ export const getters = {
 
 export const mutations = {
   pushAnsweredWord(state, answeredWord) {
-    state.answeredWords.push(answeredWord);
+    state.answeredWords.push(answeredWord)
   },
   deleteAnsweredWord(state) {
     state.answeredWords = []
@@ -16,10 +16,10 @@ export const mutations = {
 }
 
 export const actions = {
-  pushAnsweredWord({ commit }, answeredWord ) {
-    commit('pushAnsweredWord', answeredWord);
+  pushAnsweredWord({ commit }, answeredWord) {
+    commit('pushAnsweredWord', answeredWord)
   },
   deleteAnsweredWord({ commit }) {
-    commit('deleteAnsweredWord');
+    commit('deleteAnsweredWord')
   }
 }
