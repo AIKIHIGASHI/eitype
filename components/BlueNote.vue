@@ -30,11 +30,11 @@
           <div class="form-box">
             <div class="email">
               <div><font-awesome-icon icon = "envelope" /> E-mail</div>
-              <input type="text" >
+              <input type="text" v-model="email">
             </div>
             <div class="password">
               <div><font-awesome-icon icon = "lock" /> パスワード</div>
-              <input type="text" >
+              <input type="text" v-model="password">
             </div>
             <button type="submit">{{ title }}</button>
           </div>
@@ -46,12 +46,12 @@
         <div class="close" @click="blueNoteOpen()">閉じる</div>
         <div class="heading">&nbsp;</div>
         <span class="shadow1" v-if="hover1"/>
-        <div class="twitter" @mouseover="hover1 = false" @mouseleave="hover1 = true">
+        <div class="twitter" @mouseover="hover1 = false" @mouseleave="hover1 = true" @click="twitterLogin()">
           <div>Twitterアカウントで</div>
           <div>{{ title }}</div>
         </div>
         <span class="shadow2" v-if="hover2"/>
-        <div class="google" @mouseover="hover2 = false" @mouseleave="hover2 = true">
+        <div class="google" @mouseover="hover2 = false" @mouseleave="hover2 = true" @click="googleLogin()">
           <div>Googleアカウントで</div>
           <div>{{ title }}</div>
         </div>
@@ -75,6 +75,8 @@ export default {
       title: 'ログイン',
       hover1: true,
       hover2: true,
+      email: '',
+      password: '',
       className: {
         noteTransitionA: 'note-transitionA',
         noteTransitionB: 'note-transitionB',
@@ -106,9 +108,14 @@ export default {
       'greenNoteOpen',
       'purpleNoteOpen'
     ]),
+    ...mapActions('firebase', [
+      'twitterLogin',
+      'googleLogin',
+      'mailLogin',
+    ]),
     submit() {
       event.preventDefault()
-      console.log('submit')
+      this.mailLogin()
     }
   }
 }
@@ -359,7 +366,7 @@ $backCoverColor: #5f8aff;
       box-shadow: 0 5px 5px #555;
       transform: rotate(1deg);
       z-index: 1px;
-      
+
     }
   .google {
     margin: 0 auto;

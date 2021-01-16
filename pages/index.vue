@@ -11,7 +11,7 @@
       <img class="img" :src="image.src" >
     </div>
     <div class="logo">
-      <img src="~/assets/images/英タイプロゴ.png" @click="submit()">
+      <img src="~/assets/images/英タイプロゴ.png">
     </div>
     <div class="start-message">Spaceでゲームスタート</div>
     <div
@@ -180,9 +180,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions('firebase', [
-      'submit'
-    ]),
     ...mapActions('note', [
       'redNoteOpen',
       'blueNoteOpen',
