@@ -5,7 +5,8 @@
       <div>{{ new Date().getMonth() + 1}}月</div>
       <div>{{ new Date().getDate()}}日</div>
       <h1/>
-      <div>日直</div>{{ name }}
+      <div>日直</div>
+      <div class="name">&nbsp;{{ name }}</div>
     </div>
     <div class="container-bottom"/>
   </div>
@@ -16,6 +17,9 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters('user', ['name']),
+    userName() {
+      return this.name ? this.name : 'ゲスト'
+    }
   },
 }
 </script>
@@ -58,6 +62,9 @@ body {
     right: 10px;
     padding-top: 130px;
     text-align: center;
+    .name {
+      writing-mode: vertical-rl;
+    }
   }
   .container-bottom {
     background-image: url("~assets/images/黒板B.png");

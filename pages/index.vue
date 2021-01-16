@@ -160,6 +160,7 @@ export default {
     }
   },
   created() {
+    this.getUser()
     this.play()
   },
   computed: {
@@ -177,7 +178,7 @@ export default {
         [images[j], images[i]] = [images[i], images[j]]
       }
       return images.slice(0, 3)
-    },
+    }
   },
   methods: {
     ...mapActions('note', [
@@ -187,7 +188,9 @@ export default {
       'greenNoteOpen',
       'purpleNoteOpen',
     ]),
-
+    ...mapActions('user', [
+      'getUser'
+    ]),
     play() {
       addEventListener('keydown', (e) => {
         if (e.key === ' ') {
