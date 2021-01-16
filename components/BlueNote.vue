@@ -108,7 +108,7 @@ export default {
       'greenNoteOpen',
       'purpleNoteOpen'
     ]),
-    ...mapActions('firebase', [
+    ...mapActions('auth', [
       'twitterLogin',
       'googleLogin',
       'mailLogin',
