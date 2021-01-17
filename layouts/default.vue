@@ -6,7 +6,8 @@
       <div>{{ new Date().getDate()}}日</div>
       <h1/>
       <div>日直</div>
-      <div class="name">&nbsp;{{ name }}</div>
+      <div class="name">{{ name }}</div>
+
     </div>
     <div class="container-bottom"/>
   </div>
@@ -16,11 +17,11 @@
 import { mapGetters } from 'vuex'
 export default {
   computed: {
-    ...mapGetters('user', ['name']),
-    userName() {
-      return this.name ? this.name : 'ゲスト'
-    }
+    ...mapGetters('user', ['user', 'name']),
   },
+  created() {
+    console.log(this.name)
+  }
 }
 </script>
 
@@ -63,7 +64,9 @@ body {
     padding-top: 130px;
     text-align: center;
     .name {
-      writing-mode: vertical-rl;
+      word-wrap: break-word;
+      width: 30px;
+      margin-left: 5px;
     }
   }
   .container-bottom {

@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <div class="logout" v-if="user" @click="logout()">ログアウト</div>
     <div
       v-for="(image, index) in shuffle"
       :key="image.id"
@@ -38,7 +39,7 @@
       ]">
       <YellowNote />
     </div>
-    <div class="mini-note-list">
+    <div class="mini-note-list"  v-if="!this.user">
       <div class="mini-note-box">
         <div
           class="mini-note"
@@ -72,6 +73,32 @@
           @click="yellowNoteOpen()">
           <img src="~/assets/images/ノート黃.jpg" >
           <p>新規登録</p>
+        </div>
+      </div>
+    </div>
+    <div class="mini-note-list" v-else>
+      <div class="mini-note-box" style="padding: 0 350px;">
+        <div
+          class="mini-note"
+          :class="[
+            'mini-note',
+            { upMiniNote: blueNote },
+            blueNote ? '' : classNames.downMiniNote,
+          ]"
+          @click="blueNoteOpen()">
+          <img src="~/assets/images/ノート緑.jpg" >
+          <p>&nbsp;単語帳</p>
+        </div>
+        <div
+          class="mini-note"
+          :class="[
+            'mini-note',
+            { upMiniNote: yellowNote },
+            yellowNote ? '' : classNames.downMiniNote,
+          ]"
+          @click="yellowNoteOpen()">
+          <img src="~/assets/images/ノート紫.jpg" >
+          <p style="font-size: 21px">ランキング&nbsp;</p>
         </div>
       </div>
     </div>
@@ -171,6 +198,9 @@ export default {
       'greenNote',
       'purpleNote',
     ]),
+    ...mapGetters('user', [
+      'user'
+    ]),
     shuffle() {
       const images = this.images
       for (let i = images.length - 1; i > 0; i--) {
@@ -189,7 +219,8 @@ export default {
       'purpleNoteOpen',
     ]),
     ...mapActions('user', [
-      'getUser'
+      'getUser',
+      'logout'
     ]),
     play() {
       addEventListener('keydown', (e) => {
@@ -203,6 +234,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.logout {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  border-bottom: 1px solid;
+  opacity: 0.7;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
+}
+
 .img {
   width: 130px;
   height: 130px;
@@ -299,6 +342,7 @@ export default {
       position: relative;
       top: 0;
       transition: all 0.3s ease 0s;
+      cursor: pointer;
       p {
         color: black;
         font-weight: bold;

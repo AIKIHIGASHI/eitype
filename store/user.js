@@ -1,11 +1,12 @@
 export const state = () => ({
-  id: '',
-  name: '',
+  user: null,
   score: 0
 })
 
 export const getters = {
-  name: state => state.name,
+  user: state => state.user,
+  id: state => state.user.id,
+  name: state => state.user ? state.user.displayName : 'ゲスト',
   score: state => state.score
 }
 
@@ -17,10 +18,12 @@ export const mutations = {
     state.score = 0
   },
   getUser(state, { uid, displayName }) {
-    console.log(uid)
-    console.log(displayName)
-    state.id = uid
-    state.name = displayName
+    state.user = { uid, displayName }
+
+  },
+  deleteUser(state) {
+    console.log('deleteUser')
+    state.user = null
   }
 }
 
@@ -33,8 +36,23 @@ export const actions = {
   },
   getUser({ commit }) {
     this.$fireAuth.onAuthStateChanged((user) => {
+      if (!user) {
+        console.log('userはいません')
+        return
+      }
       console.log('getUser', user)
       commit('getUser', user)
     })
+  },
+  logout({ commit }) {
+    console.log('logout')
+    this.$fireAuth.signOut()
+      .then(() => {
+        console.log('ログアウト成功')
+        commit('deleteUser')
+      })
+      .catch((e) => {
+        console.log('ログアウト失敗', e.message)
+      })
   }
 }

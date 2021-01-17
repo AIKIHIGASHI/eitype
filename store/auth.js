@@ -46,4 +46,5 @@ export const actions = {
   register({ commit }) {
     console.log('twitterRegister')
   },
+
 }
