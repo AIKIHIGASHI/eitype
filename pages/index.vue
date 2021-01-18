@@ -6,15 +6,14 @@
       :key="image.id"
       :class="['img' + index]">
       <div class="img-text">
-        <span :style="{ color: image.color }">{{ image.char }}</span>
-        {{ image.text }}
+        <span :style="{ color: image.color }">{{ image.char }}<span style="color: white; opacity: 0.7;">{{ image.text }}</span></span>
       </div>
       <img class="img" :src="image.src" >
     </div>
     <div class="logo">
       <img src="~/assets/images/英タイプロゴ.png">
     </div>
-    <div class="start-message">Spaceでゲームスタート</div>
+    <div class="start-message">Enterでゲームスタート</div>
     <div
       class="note-component"
       :class="[
@@ -153,7 +152,7 @@ export default {
   created() {
     console.log('created')
     this.getUser()
-    this.play()
+    addEventListener('keydown', this.play)
   },
   computed: {
     ...mapGetters('note', [
@@ -180,12 +179,12 @@ export default {
       'getUser',
       'logout'
     ]),
-    play() {
-      addEventListener('keydown', (e) => {
-        if (e.key === ' ') {
-          this.$router.push('/play')
-        }
-      })
+    play(e) {
+      if (e.key === 'Enter') {
+        this.$store.commit('audio/chime1Play')
+        removeEventListener('keydown', this.play)
+        this.$router.push('/play')
+      }
     },
   },
 }

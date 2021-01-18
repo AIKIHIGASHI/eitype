@@ -14,8 +14,8 @@
     </div>
     <div class="type-box">
       <div class="type">
-        <span>{{ pressed }}</span>
-        {{ word }}
+        <span>{{ pressed }}<span style="color: white; opacity: 0.7;">{{ word }}</span></span>
+
       </div>
     </div>
     <div class="next-word-box">Next : {{ newWords[index + 1].word }}</div>
@@ -29,6 +29,7 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
+      id: null,
       index: 0,
       miss: 0,
       playing: false,
@@ -76,13 +77,16 @@ export default {
     },
     keyDown(e) {
       if (e.key === 'Escape') {
+        console.log('エスケープ')
         removeEventListener('keydown', this.keyDown)
+        clearInterval(this.id)
         this.$router.push('/')
         return
       }
       if (e.key !== this.word[0]) { // 間違えた時の処理
         const wrong = new Audio(require('~/assets/sounds/wrong.mp3'))
         wrong.play()
+        wrong.volume = 0.2
         console.log(e.key, '間違えました')
         this.correct = false
         this.wrongChar = true
@@ -90,6 +94,7 @@ export default {
       }
       const collect = new Audio(require('~/assets/sounds/collect.mp3'))
       collect.play()
+      collect.volume = 0.3
       console.log(e.key)
       this.chars.push({char: e.key, wrongChar: this.wrongChar})
       this.wrongChar = false
@@ -113,11 +118,12 @@ export default {
       }
     },
     countDown() {
-      const id = setInterval(() => {
+      this.id = setInterval(async () => {
         this.time--
         if (this.time <= 0) {
-          removeEventListener('keydown', this.keyDown)
-          clearInterval(id)
+          clearInterval(this.id)
+          this.$store.commit('audio/chime2Play')
+          await this.endCountDown()
           console.log('result画面へ')
           this.$router.push('/result')
         }
@@ -127,6 +133,20 @@ export default {
       let count = 3
       return new Promise((resolve) => {
         const id = setInterval(() => {
+          count--
+          console.log(count)
+          if (count <= 0) {
+            clearInterval(id)
+            resolve()
+          }
+        }, 1000)
+      })
+    },
+    endCountDown() {
+      let count = 3
+      return new Promise((resolve) => {
+        const id = setInterval(() => {
+          removeEventListener('keydown', this.keyDown)
           count--
           console.log(count)
           if (count <= 0) {

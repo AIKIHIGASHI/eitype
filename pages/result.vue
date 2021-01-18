@@ -3,7 +3,7 @@
     <section>〜結果発表〜</section>
     <div class="result-box">
       <div class="left-box">
-        <div class="retry">&nbsp;&nbsp;&nbsp;&nbsp;リトライ : Spaceキー</div>
+        <div class="retry">&nbsp;&nbsp;&nbsp;&nbsp;リトライ : Enterキー</div>
         <div class="esc">タイトル : Escキー</div>
         <span class="tweet">tweet</span>
       </div>
@@ -33,15 +33,19 @@
         </div>
       </div>
     </div>
-    <div/>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 export default {
+  data() {
+    return {
+      chime2: new Audio(require('~/assets/sounds/chime2.mp3')),
+    }
+  },
   created() {
-    this.retry()
+    addEventListener('keydown', this.command)
   },
   computed: {
     ...mapGetters('word', ['answeredWords']),
@@ -50,15 +54,30 @@ export default {
   methods: {
     ...mapActions('word', ['deleteAnsweredWord']),
     ...mapActions('user', ['resetScore']),
+    command(e) {
+      if (e.key === 'Enter') {
+        console.log('result')
+        this.deleteAnsweredWord()
+        this.resetScore()
+        this.$store.commit('audio/chime2Stop')
+        this.$store.commit('audio/chime1Play')
+        this.retry()
+      }
+      if (e.key === 'Escape') {
+        console.log('result')
+        this.$store.commit('audio/chime2Stop')
+        this.deleteAnsweredWord()
+        this.resetScore()
+        this.title()
+      }
+    },
     retry() {
-      addEventListener('keydown', (e) => {
-        if (e.key === ' ') {
-          this.deleteAnsweredWord()
-          this.resetScore()
-          this.$router.push('/play')
-          // location.reload()
-        }
-      })
+      removeEventListener('keydown', this.command)
+      this.$router.push('/play')
+    },
+    title() {
+      removeEventListener('keydown', this.command)
+      this.$router.push('/')
     }
   }
 }
