@@ -4,10 +4,12 @@
     <div class="side-box">
       <div>{{ new Date().getMonth() + 1}}月</div>
       <div>{{ new Date().getDate()}}日</div>
-      <h1></h1>
-      <div>日直</div>{{ name }}
+      <h1/>
+      <div>日直</div>
+      <div class="name">{{ name }}</div>
+
     </div>
-    <div class="container-bottom"></div>
+    <div class="container-bottom"/>
   </div>
 </template>
 
@@ -15,8 +17,11 @@
 import { mapGetters } from 'vuex'
 export default {
   computed: {
-    ...mapGetters('user', ['name']),
+    ...mapGetters('user', ['user', 'name']),
   },
+  created() {
+    console.log(this.name)
+  }
 }
 </script>
 
@@ -58,6 +63,11 @@ body {
     right: 10px;
     padding-top: 130px;
     text-align: center;
+    .name {
+      word-wrap: break-word;
+      width: 10px;
+      margin-left: 5px;
+    }
   }
   .container-bottom {
     background-image: url("~assets/images/黒板B.png");

@@ -1,130 +1,129 @@
 <template>
   <div>
     <div
-      :class="['note', {slide: yellowNote}, yellowNote ? className.noteTransitionB : className.noteTransitionA]"
-    >
+      :class="['note', {slide: yellowNote}, yellowNote ? className.noteTransitionB : className.noteTransitionA]">
       <span
-        :class="['cover', {open1: yellowNote}, yellowNote ? className.pageTransitionB1 : className.pageTransitionA4]"
-      >
+        :class="['cover', {open1: yellowNote}, yellowNote ? className.pageTransitionB1 : className.pageTransitionA4]">
         <h1>{{ title }}</h1>
-        <div></div>
-        <div></div>
+        <div/>
+        <div/>
       </span>
       <span
-        :class="['cover-back', {open2: yellowNote}, yellowNote ? className.pageTransitionB1 : className.pageTransitionA4]"
-      ></span>
+        :class="['cover-back', {open2: yellowNote}, yellowNote ? className.pageTransitionB1 : className.pageTransitionA4]"/>
       <span
-        :class="['page1', {open3: yellowNote}, yellowNote ? className.pageTransitionB2 : className.pageTransitionA3]"
-      >
-        <InThePage></InThePage>
+        :class="['page1', {open3: yellowNote}, yellowNote ? className.pageTransitionB2 : className.pageTransitionA3]">
+        <InThePage/>
       </span>
       <span
-        :class="['page2', {open4: yellowNote}, yellowNote ? className.pageTransitionB3 : className.pageTransitionA2]"
-      >
-        <InThePage></InThePage>
+        :class="['page2', {open4: yellowNote}, yellowNote ? className.pageTransitionB3 : className.pageTransitionA2]">
+        <InThePage/>
       </span>
       <span
-        :class="['page3', {open5: yellowNote}, yellowNote ? className.pageTransitionB4 : className.pageTransitionA1]"
-      >
-        <InThePage></InThePage>
+        :class="['page3', {open5: yellowNote}, yellowNote ? className.pageTransitionB4 : className.pageTransitionA1]">
+        <InThePage/>
       </span>
       <span
-        :class="['page4' ,{open6: yellowNote}, yellowNote ? className.pageTransitionB4 : className.pageTransitionA1]"
-      >
+        :class="['page4' ,{open6: yellowNote}, yellowNote ? className.pageTransitionB4 : className.pageTransitionA1]">
         <div class="heading">{{ title }}</div>
 
         <form @submit="submit()">
           <div class="form-box">
             <div class="form">
               <div><font-awesome-icon icon = "user" /> ユーザー名</div>
-              <input type="text" />
+              <input type="text" v-model="userName">
             </div>
             <div class="form">
               <div><font-awesome-icon icon = "envelope" /> E-mail</div>
-              <input type="text" />
+              <input type="text" v-model="email">
             </div>
             <div class="form">
               <div><font-awesome-icon icon = "lock" /> パスワード</div>
-              <input type="text" />
+              <input type="text" v-model="password">
             </div>
             <button type="submit">{{ title }}</button>
           </div>
         </form>
       </span>
       <span
-        :class="['rear-cover', {rearCoverAfter: yellowNote}, yellowNote ? className.noteTransitionB : className.noteTransitionA]"
-      ></span>
+        :class="['rear-cover', {rearCoverAfter: yellowNote}, yellowNote ? className.noteTransitionB : className.noteTransitionA]"/>
       <div :class="['note-index', {noteShadowInset: yellowNote}]">
         <div class="close" @click="yellowNoteOpen()">閉じる</div>
         <div class="heading">&nbsp;</div>
-        <span class="shadow1" v-if="hover1"></span>
-        <div class="twitter" @mouseover="hover1 = false" @mouseleave="hover1 = true">
+        <span class="shadow1" v-if="hover1"/>
+        <div class="twitter" @mouseover="hover1 = false" @mouseleave="hover1 = true" @click="twitterLogin()">
           <div>Twitterアカウントで</div>
           <div>{{ title }}</div>
         </div>
-        <span class="shadow2" v-if="hover2"></span>
-        <div class="google" @mouseover="hover2 = false" @mouseleave="hover2 = true">
+        <span class="shadow2" v-if="hover2"/>
+        <div class="google" @mouseover="hover2 = false" @mouseleave="hover2 = true" @click="googleLogin()">
           <div>Googleアカウントで</div>
           <div>{{ title }}</div>
         </div>
       </div>
-      <div :class="['note-shadow']"></div>
+      <div :class="['note-shadow']"/>
       <div
-        :class="['note-shadow', {noteShadowSlide: yellowNote}, yellowNote ? className.pageTransitionB2 : className.noteTransitionA]"
-      ></div>
+        :class="['note-shadow', {noteShadowSlide: yellowNote}, yellowNote ? className.pageTransitionB2 : className.noteTransitionA]"/>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-import InThePage from "~/components/InThePage.vue";
+import { mapGetters, mapActions } from 'vuex'
+import InThePage from '~/components/InThePage.vue'
 export default {
   components: {
     InThePage
   },
   data() {
     return {
-      title: "新規登録",
+      title: '新規登録',
       hover1: true,
       hover2: true,
+      userName: '',
+      email: '',
+      password: '',
       className: {
-        noteTransitionA: "note-transitionA",
-        noteTransitionB: "note-transitionB",
-        pageTransitionA1: "page-transitionA1",
-        pageTransitionA2: "page-transitionA2",
-        pageTransitionA3: "page-transitionA3",
-        pageTransitionA4: "page-transitionA4",
-        pageTransitionB1: "page-transitionB1",
-        pageTransitionB2: "page-transitionB2",
-        pageTransitionB3: "page-transitionB3",
-        pageTransitionB4: "page-transitionB4"
+        noteTransitionA: 'note-transitionA',
+        noteTransitionB: 'note-transitionB',
+        pageTransitionA1: 'page-transitionA1',
+        pageTransitionA2: 'page-transitionA2',
+        pageTransitionA3: 'page-transitionA3',
+        pageTransitionA4: 'page-transitionA4',
+        pageTransitionB1: 'page-transitionB1',
+        pageTransitionB2: 'page-transitionB2',
+        pageTransitionB3: 'page-transitionB3',
+        pageTransitionB4: 'page-transitionB4'
       }
-    };
+    }
   },
   computed: {
-    ...mapGetters("note", [
-      "redNote",
-      "blueNote",
-      "yellowNote",
-      "greenNote",
-      "purpleNote"
+    ...mapGetters('note', [
+      'redNote',
+      'blueNote',
+      'yellowNote',
+      'greenNote',
+      'purpleNote'
     ]),
   },
   methods: {
-    ...mapActions("note", [
-      "redNoteOpen",
-      "blueNoteOpen",
-      "yellowNoteOpen",
-      "greenNoteOpen",
-      "purpleNoteOpen"
+    ...mapActions('note', [
+      'redNoteOpen',
+      'blueNoteOpen',
+      'yellowNoteOpen',
+      'greenNoteOpen',
+      'purpleNoteOpen'
+    ]),
+    ...mapActions('auth', [
+      'twitterLogin',
+      'googleLogin',
+      'register',
     ]),
     submit() {
-      event.preventDefault();
-      console.log("submit");
+      event.preventDefault()
+      this.register({name: this.userName, email: this.email, password: this.password})
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -369,7 +368,7 @@ $backCoverColor: #FFA700;
       box-shadow: 0 5px 5px #555;
       transform: rotate(1deg);
       z-index: 1px;
-      
+
     }
   .google {
     margin: 0 auto;

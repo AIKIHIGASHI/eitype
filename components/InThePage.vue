@@ -1,22 +1,22 @@
 <template>
   <div>
-    <div class="heading"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
-    <div class="row"></div>
+    <div class="heading"/>
+    <div class="row"/>
+    <div class="row"/>
+    <div class="row"/>
+    <div class="row"/>
+    <div class="row"/>
+    <div class="row"/>
+    <div class="row"/>
+    <div class="row"/>
+    <div class="row"/>
+    <div class="row"/>
+    <div class="row"/>
+    <div class="row"/>
+    <div class="row"/>
+    <div class="row"/>
+    <div class="row"/>
+    <div class="row"/>
   </div>
 </template>
 

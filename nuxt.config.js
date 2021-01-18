@@ -5,33 +5,43 @@ export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'eitype',
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+    meta: [{
+      charset: 'utf-8'
+    },
+    {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1'
+    },
+    {
+      hid: 'description',
+      name: 'description',
+      content: ''
+    }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico'
+    }]
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: [
-  ],
+  css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    '~/plugins/firebase',
+    '~/plugins/auth',
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
-  buildModules: [
-  ],
+  buildModules: [],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: ['nuxt-webfontloader', '@nuxtjs/style-resources', 'nuxt-fontawesome',],
+  modules: ['nuxt-webfontloader', '@nuxtjs/style-resources', 'nuxt-fontawesome', '@nuxtjs/dotenv'],
   webfontloader: {
     google: {
       families: ['Caveat']
@@ -39,16 +49,27 @@ export default {
   },
 
   fontawesome: {
-    imports: [
-      {
-        set: '@fortawesome/free-solid-svg-icons',
-        icons: ['fas']
-      }
-    ]
+    imports: [{
+      set: '@fortawesome/free-solid-svg-icons',
+      icons: ['fas']
+    }]
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    extend(config, {
+      isDev,
+      isClient
+    }) {
+      if (isDev && isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
+    },
     extend(config, ctx) {
       config.module.rules.push({
         test: /\.(ogg|mp3|wav|mpe?g)$/i,
@@ -57,6 +78,6 @@ export default {
           name: '[path][name].[ext]'
         }
       })
-    }
+    },
   }
 }

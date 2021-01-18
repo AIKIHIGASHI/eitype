@@ -12,7 +12,7 @@
           <div>解答用紙</div>
           <div class="name-box">
             <div style="width:20%;">氏名</div>
-            <div style="width:55%;" class="name">{{ name }}</div>
+            <div style="width:55%;" class="name">{{ name.substr( 0, 7 ) }}</div>
             <div style="width:20%;">得点</div>
             <div style="width:25%;"><span class="score">{{ score }}</span></div>
           </div>
@@ -25,7 +25,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><span class="circle" v-if="word.correct"></span><span v-for="(char, index) in word.chars" :key="char.id"><span :class="{wrong: char.wrongChar}">{{ char.char }}</span></span></td>
+                  <td><span class="circle" v-if="word.correct"/><span v-for="char in word.chars" :key="char.id"><span :class="{wrong: char.wrongChar}">{{ char.char }}</span></span></td>
                 </tr>
               </tbody>
             </table>
@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <div></div>
+    <div/>
   </div>
 </template>
 
@@ -53,12 +53,12 @@ export default {
     retry() {
       addEventListener('keydown', (e) => {
         if (e.key === ' ') {
-          this.deleteAnsweredWord();
-          this.resetScore();
-          this.$router.push('/play');
+          this.deleteAnsweredWord()
+          this.resetScore()
+          this.$router.push('/play')
           // location.reload()
         }
-      }) 
+      })
     }
   }
 }
@@ -134,8 +134,6 @@ section {
           border-color: black;
           width: 24.98%;
           margin-bottom: 20px;
-        }
-        tr {
         }
         th {
           font-size: 12px;
