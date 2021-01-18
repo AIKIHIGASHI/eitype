@@ -39,69 +39,24 @@
       ]">
       <YellowNote />
     </div>
-    <div class="mini-note-list"  v-if="!this.user">
-      <div class="mini-note-box">
-        <div
-          class="mini-note"
-          :class="[
-            'mini-note',
-            { upMiniNote: blueNote },
-            blueNote ? '' : classNames.downMiniNote,
-          ]"
-          @click="blueNoteOpen()">
-          <img src="~/assets/images/ノート青.jpg" >
-          <p>ログイン</p>
-        </div>
-        <div
-          class="mini-note"
-          :class="[
-            'mini-note',
-            { upMiniNote: redNote },
-            redNote ? '' : classNames.downMiniNote,
-          ]"
-          @click="redNoteOpen()">
-          <img src="~/assets/images/ノート赤.jpg" >
-          <p>&nbsp;遊び方</p>
-        </div>
-        <div
-          class="mini-note"
-          :class="[
-            'mini-note',
-            { upMiniNote: yellowNote },
-            yellowNote ? '' : classNames.downMiniNote,
-          ]"
-          @click="yellowNoteOpen()">
-          <img src="~/assets/images/ノート黃.jpg" >
-          <p>新規登録</p>
-        </div>
-      </div>
+    <div
+      class="note-component"
+      :class="[
+        { showNote: greenNote },
+        greenNote ? '' : classNames.downNoteTransition,
+      ]">
+      <greenNote />
     </div>
-    <div class="mini-note-list" v-else>
-      <div class="mini-note-box" style="padding: 0 350px;">
-        <div
-          class="mini-note"
-          :class="[
-            'mini-note',
-            { upMiniNote: blueNote },
-            blueNote ? '' : classNames.downMiniNote,
-          ]"
-          @click="blueNoteOpen()">
-          <img src="~/assets/images/ノート緑.jpg" >
-          <p>&nbsp;単語帳</p>
-        </div>
-        <div
-          class="mini-note"
-          :class="[
-            'mini-note',
-            { upMiniNote: yellowNote },
-            yellowNote ? '' : classNames.downMiniNote,
-          ]"
-          @click="yellowNoteOpen()">
-          <img src="~/assets/images/ノート紫.jpg" >
-          <p style="font-size: 21px">ランキング&nbsp;</p>
-        </div>
-      </div>
+    <div
+      class="note-component"
+      :class="[
+        { showNote: purpleNote },
+        purpleNote ? '' : classNames.downNoteTransition,
+      ]">
+      <purpleNote />
     </div>
+    <NoteListAfter v-if="user"/>
+    <NoteListBefore v-else />
   </div>
 </template>
 
@@ -110,11 +65,19 @@ import { mapGetters, mapActions } from 'vuex'
 import RedNote from '~/components/RedNote.vue'
 import BlueNote from '~/components/BlueNote.vue'
 import YellowNote from '~/components/YellowNote.vue'
+import GreenNote from '~/components/GreenNote.vue'
+import PurpleNote from '~/components/PurpleNote.vue'
+import NoteListBefore from '~/components/NoteListBefore.vue'
+import NoteListAfter from '~/components/NoteListAfter.vue'
 export default {
   components: {
     RedNote,
     BlueNote,
     YellowNote,
+    GreenNote,
+    PurpleNote,
+    NoteListBefore,
+    NoteListAfter,
   },
   data() {
     return {
@@ -183,10 +146,12 @@ export default {
       classNames: {
         downNoteTransition: 'down-note-transition',
         downMiniNote: 'down-mini-note-transition',
+        downMiniNote2: 'down-mini-note-transition2',
       },
     }
   },
   created() {
+    console.log('created')
     this.getUser()
     this.play()
   },
@@ -211,13 +176,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions('note', [
-      'redNoteOpen',
-      'blueNoteOpen',
-      'yellowNoteOpen',
-      'greenNoteOpen',
-      'purpleNoteOpen',
-    ]),
     ...mapActions('user', [
       'getUser',
       'logout'
@@ -330,15 +288,16 @@ export default {
   top: 80px;
 }
 
-.mini-note-list {
+.mini-note-list2 {
   width: 100%;
   position: absolute;
+  z-index: 1px;
   bottom: 35px;
-  .mini-note-box {
+  .mini-note-box2 {
     display: flex;
     justify-content: space-between;
     padding: 0 300px;
-    .mini-note {
+    .mini-note2 {
       position: relative;
       top: 0;
       transition: all 0.3s ease 0s;
@@ -351,20 +310,18 @@ export default {
         left: 25px;
       }
     }
-    .mini-note:hover {
+    .mini-note2:hover {
       top: -30px;
     }
-
-    .upMiniNote {
+    .upMiniNote2 {
       transform: translateY(-200px);
       opacity: 0;
     }
-    .upMiniNote:hover {
+    .upMiniNote2:hover {
       transform: translateY(-200px);
       opacity: 0;
     }
-
-    .down-mini-note-transition {
+    .down-mini-note-transition2 {
       transition: transform 0.3s ease 2.2s, opacity 0.3s ease 2.2s;
     }
   }
