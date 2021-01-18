@@ -13,38 +13,65 @@ export const mutations = {
 }
 
 export const actions = {
-  twitterLogin({ commit }) {
+  twitterLogin({ commit, dispatch }) {
     const provider = new this.$firebase.auth.TwitterAuthProvider()
     this.$fireAuth.signInWithPopup(provider)
       .then((result) => {
         console.log(result)
-        console.log('成功')
-        location.reload()
+        console.log('twitterLogin成功')
+        dispatch('note/loginAfterNoteClose', null, { root: true })
       })
-      .catch((error) => {
-        console.log(error.message)
-        console.log('失敗')
+      .catch((e) => {
+        console.log(e.message)
+        console.log('twitterLogin失敗')
       })
   },
-  googleLogin({ commit }) {
+  googleLogin({ commit, dispatch }) {
     console.log('test')
     const provider = new this.$firebase.auth.GoogleAuthProvider()
     this.$fireAuth.signInWithPopup(provider)
       .then((result) => {
         console.log(result)
-        console.log('成功')
-        location.reload()
+        console.log('googleLogin成功')
+        dispatch('note/loginAfterNoteClose', null, { root: true })
       })
-      .catch((error) => {
-        console.log(error.message)
-        console.log('失敗')
+      .catch((e) => {
+        console.log(e.message)
+        console.log('googleLogin失敗')
       })
   },
-  login({ commit }) {
-    console.log('mailLogin')
+  login({ commit, dispatch }, user) {
+    console.log('login')
+    this.$fireAuth.signInWithEmailAndPassword(user.email, user.password)
+      .then((result) => {
+        console.log('ログイン成功', result)
+        dispatch('note/loginAfterNoteClose', null, { root: true })
+      })
+      .catch((e) => {
+        console.log('ログイン失敗', e.message)
+      })
   },
-  register({ commit }) {
-    console.log('twitterRegister')
+  register({ commit, dispatch }, user) {
+    console.log('Register', user)
+    this.$fireAuth.createUserWithEmailAndPassword(user.email, user.password)
+      .then((result) => {
+        console.log('新規登録成功', result)
+        dispatch('note/loginAfterNoteClose', null, { root: true })
+        console.log('updateProfile')
+        result.user.updateProfile({
+          displayName: user.name,
+        })
+          .then((result) => {
+            console.log('名前設定完了', result)
+            dispatch('user/getUser', null, { root: true })
+          })
+          .catch((e) => {
+            console.log('名前設定失敗', e.message)
+          })
+      })
+      .catch((e) => {
+        console.log('新規登録失敗', e.message)
+      })
   },
 
 }

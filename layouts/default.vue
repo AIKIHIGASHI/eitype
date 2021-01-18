@@ -65,7 +65,7 @@ body {
     text-align: center;
     .name {
       word-wrap: break-word;
-      width: 30px;
+      width: 10px;
       margin-left: 5px;
     }
   }

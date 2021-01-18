@@ -1,64 +1,79 @@
 <template>
   <div>
     <div
-      :class="['note', {slide: blueNote}, blueNote ? className.noteTransitionB : className.noteTransitionA]">
+      :class="['note', {slide: purpleNote}, purpleNote ? classNames.noteTransitionB : classNames.noteTransitionA]">
       <span
-        :class="['cover', {open1: blueNote}, blueNote ? className.pageTransitionB1 : className.pageTransitionA4]">
+        :class="['cover', {open1: purpleNote}, purpleNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4]">
         <h1>{{ title }}</h1>
-        <div/>
-        <div/>
+        <div />
+        <div />
       </span>
       <span
-        :class="['cover-back', {open2: blueNote}, blueNote ? className.pageTransitionB1 : className.pageTransitionA4]"/>
+        :class="['cover-back', {open2: purpleNote}, purpleNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4]"/>
       <span
-        :class="['page1', {open3: blueNote}, blueNote ? className.pageTransitionB2 : className.pageTransitionA3]">
-        <InThePage/>
+        :class="['page1', {open3: purpleNote}, purpleNote ? classNames.pageTransitionB2 : classNames.pageTransitionA3]">
+        <InThePage />
       </span>
       <span
-        :class="['page2', {open4: blueNote}, blueNote ? className.pageTransitionB3 : className.pageTransitionA2]">
-        <InThePage/>
+        :class="['page2', {open4: purpleNote}, purpleNote ? classNames.pageTransitionB3 : classNames.pageTransitionA2]">
+        <InThePage />
       </span>
       <span
-        :class="['page3', {open5: blueNote}, blueNote ? className.pageTransitionB4 : className.pageTransitionA1]">
-        <InThePage/>
+        :class="['page3', {open5: purpleNote}, purpleNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1]">
+        <InThePage />
       </span>
       <span
-        :class="['page4' ,{open6: blueNote}, blueNote ? className.pageTransitionB4 : className.pageTransitionA1]">
+        :class="['page4' ,{open6: purpleNote}, purpleNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1]">
         <div class="heading">{{ title }}</div>
-
-        <form @submit="submit()">
-          <div class="form-box">
-            <div class="email">
-              <div><font-awesome-icon icon = "envelope" /> E-mail</div>
-              <input type="text" v-model="email">
-            </div>
-            <div class="password">
-              <div><font-awesome-icon icon = "lock" /> パスワード</div>
-              <input type="text" v-model="password">
-            </div>
-            <button type="submit">{{ title }}</button>
-          </div>
-        </form>
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
       </span>
       <span
-        :class="['rear-cover', {rearCoverAfter: blueNote}, blueNote ? className.noteTransitionB : className.noteTransitionA]"/>
-      <div :class="['note-index', {noteShadowInset: blueNote}]">
-        <div class="close" @click="blueNoteOpen()">閉じる</div>
-        <div class="heading">&nbsp;</div>
-        <span class="shadow1" v-if="hover1"/>
-        <div class="twitter" @mouseover="hover1 = false" @mouseleave="hover1 = true" @click="twitterLogin()">
-          <div>Twitterアカウントで</div>
-          <div>{{ title }}</div>
+        :class="['rear-cover', {rearCoverAfter: purpleNote}, purpleNote ? classNames.noteTransitionB : classNames.noteTransitionA]"/>
+      <div :class="['note-index', {noteShadowInset: purpleNote}]">
+        <div class="close" @click="purpleNoteOpen()">閉じる</div>
+        <div class="heading">ログイン後</div>
+        <div class="row">ログイン後、以下の機能を使用できます。</div>
+        <div class="row" />
+        <div class="row" />
+        <div class="row">
+          ☆
+          <span class="red">単語帳</span>☆
         </div>
-        <span class="shadow2" v-if="hover2"/>
-        <div class="google" @mouseover="hover2 = false" @mouseleave="hover2 = true" @click="googleLogin()">
-          <div>Googleアカウントで</div>
-          <div>{{ title }}</div>
+        <div class="row">今まで入力された英単語を単語帳に記録できます。</div>
+        <div class="row">たくさんプレイして単語帳を完成させましょう。</div>
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row">
+          ☆
+          <span class="red">ランキング</span>☆
         </div>
+        <div class="row">各ユーザーの得点のランキングが表示されます。</div>
+        <div class="row">高得点を狙ってランキング上位を目指しましょう。</div>
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
+        <div class="row" />
       </div>
-      <div :class="['note-shadow']"/>
+      <div :class="['note-shadow']" />
       <div
-        :class="['note-shadow', {noteShadowSlide: blueNote}, blueNote ? className.pageTransitionB2 : className.noteTransitionA]"/>
+        :class="['note-shadow', {noteShadowSlide: purpleNote}, purpleNote ? classNames.pageTransitionB2 : classNames.noteTransitionA]"/>
     </div>
   </div>
 </template>
@@ -72,12 +87,8 @@ export default {
   },
   data() {
     return {
-      title: 'ログイン',
-      hover1: true,
-      hover2: true,
-      email: '',
-      password: '',
-      className: {
+      title: 'ランキング',
+      classNames: {
         noteTransitionA: 'note-transitionA',
         noteTransitionB: 'note-transitionB',
         pageTransitionA1: 'page-transitionA1',
@@ -98,7 +109,7 @@ export default {
       'yellowNote',
       'greenNote',
       'purpleNote'
-    ]),
+    ])
   },
   methods: {
     ...mapActions('note', [
@@ -107,16 +118,7 @@ export default {
       'yellowNoteOpen',
       'greenNoteOpen',
       'purpleNoteOpen'
-    ]),
-    ...mapActions('auth', [
-      'twitterLogin',
-      'googleLogin',
-      'login',
-    ]),
-    submit() {
-      event.preventDefault()
-      this.login({email: this.email, password: this.password})
-    }
+    ])
   }
 }
 </script>
@@ -128,7 +130,7 @@ export default {
   transform: rotateY(0deg) translateZ($index);
   background: rgb(255, 255, 255);
   border: 1px solid gray;
-  > div {
+  div {
     transform: rotateY(180deg);
     transform-origin: center center;
   }
@@ -139,8 +141,8 @@ export default {
 }
 
 $thickness: rgb(231, 231, 231);
-$coverColor: #9be8ff;
-$backCoverColor: #5f8aff;
+$coverColor: #db98ff;
+$backCoverColor: #cf34fc;
 
 .heading {
   font-size: 30px;
@@ -148,6 +150,19 @@ $backCoverColor: #5f8aff;
   border-bottom: 1px solid #93c5d8;
   margin: 30px 20px 15px;
   padding-bottom: 10px;
+}
+
+.row {
+  font-size: 13px;
+  border-bottom: 1px solid rgb(170, 170, 170);
+  margin: 0 25px;
+  height: 20px;
+  line-height: 20px;
+  text-align: left;
+}
+
+.red {
+  color: red;
 }
 
 .note,
@@ -256,45 +271,6 @@ $backCoverColor: #5f8aff;
   .open6 {
     transform: rotateY(-180deg) translateZ(0px);
   }
-  .form-box {
-    transform: rotateY(180deg);
-    transform-origin: center center;
-    margin: 0 30px;
-    font-size: 20px;
-    color: gray;
-    .email {
-      border-bottom: 1px solid #93c5d8;
-      margin: 50px 0;
-    }
-    .password {
-      border-bottom: 1px solid #93c5d8;
-    }
-    input {
-      border: none;
-      width: 100%;
-      text-align: center;
-      padding: 5px;
-      margin-top: 5px;
-      font-size: 18px;
-      outline: none;
-    }
-    button {
-      font-family: "Wawati SC";
-      color: gray;
-      font-size: 15px;
-      background-color: transparent;
-      border: none;
-      border-bottom: 1px solid #93c5d8;
-      width: 80px;
-      margin-top: 50px;
-      cursor: pointer;
-      outline: none;
-      padding: 0;
-      &:hover {
-        color: #93c5d8;
-      }
-    }
-  }
 }
 
 // ーーーーーー本がスライドする速度ーーーーーーーーーーー
@@ -325,73 +301,18 @@ $backCoverColor: #5f8aff;
     border-bottom: 1px solid #93c5d8;
     width: 80px;
     cursor: pointer;
-    &:hover {
-      color: #93c5d8;
-    }
   }
-  .shadow1 {
-      width: 215px;
-      height: 70px;
-      background: rgb(255, 255, 255);
-      position: absolute;
-      top: 158px;
-      right: 62px;
-      box-shadow: 0 5px 5px #555;
-      transform: rotate(1deg);
-      z-index: 1px;
-    }
-  .twitter {
-    width: 250px;
-    height: 80px;
-    margin: 70px auto;
-    background-color: skyblue;
-    position: relative;
-    box-shadow: 30px 0 0 0 rgb(0, 110, 255) inset;
-    z-index: 2px;
-    cursor: pointer;
-    div {
-      font-size: 20px;
-      color: rgb(0, 110, 255);
-      padding: 8px 0 0 20px;
-      font-weight: bold;
-    }
-  }
-  .shadow2 {
-      width: 210px;
-      height: 70px;
-      background: rgb(255, 255, 255);
-      position: absolute;
-      top: 308px;
-      right: 62px;
-      box-shadow: 0 5px 5px #555;
-      transform: rotate(1deg);
-      z-index: 1px;
-
-    }
-  .google {
-    margin: 0 auto;
-    width: 250px;
-    height: 80px;
-    background: #ff9b9b;
-    box-shadow: 30px 0 0 0 red inset;
-    position: relative;
-    z-index: 2px;
-    cursor: pointer;
-    div {
-      font-size: 20px;
-      color: red;
-      padding: 8px 0 0 20px;
-      font-weight: bold;
-    }
+  .close:hover {
+    color: #93c5d8;
   }
 }
 
-// ノートの中の影の移動
+// ーーーーーーノートの中の影の移動ーーーーーー
 .noteShadowInset {
   box-shadow: 0 0 1px 0 rgb(223, 223, 223) inset;
 }
 
-// ノートの背表紙の移動
+// ーーーーーーノートの背表紙の移動ーーーーーー
 .rear-cover {
   display: inline-block;
   width: calc(100% - 30px);
@@ -403,7 +324,7 @@ $backCoverColor: #5f8aff;
   // transition: all 1.5s ease 1s;
 }
 
-// .noteのアニメーション
+// ーーーーーーノートのアニメーションーーーーーー
 
 .rearCoverAfter {
   top: 0;
@@ -417,7 +338,7 @@ $backCoverColor: #5f8aff;
   border-left: 0px solid rgba(255, 0, 0, 0);
 }
 
-// ノートの内側の影
+// ーーーーーーノートの内側の影ーーーーーー
 .note-shadow {
   border: none;
   background-color: rgba(0, 0, 0, 0.3);

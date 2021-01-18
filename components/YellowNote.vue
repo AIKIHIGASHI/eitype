@@ -120,7 +120,7 @@ export default {
     ]),
     submit() {
       event.preventDefault()
-      this.register()
+      this.register({name: this.userName, email: this.email, password: this.password})
     }
   }
 }

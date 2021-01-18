@@ -59,7 +59,7 @@ export default {
     this.playing = true
     console.log('スタート')
     this.shuffle()
-    // this.countDown();
+    this.countDown()
     this.word = this.newWords[this.index].word
     addEventListener('keydown', this.keyDown)
   },
@@ -67,7 +67,7 @@ export default {
     ...mapActions('word', ['pushAnsweredWord', ]),
     ...mapActions('user', ['incrementScore', ]),
     shuffle() {
-      const words = this.words 
+      const words = this.words
       for (let i = words.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [words[j], words[i]] = [words[i], words[j]]
@@ -121,7 +121,7 @@ export default {
           console.log('result画面へ')
           this.$router.push('/result')
         }
-      }, 1000) 
+      }, 1000)
     },
     startCountDown() {
       let count = 3
@@ -181,4 +181,3 @@ export default {
   padding-top: 100px;
 }
 </style>
-

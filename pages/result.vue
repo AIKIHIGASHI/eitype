@@ -12,7 +12,7 @@
           <div>解答用紙</div>
           <div class="name-box">
             <div style="width:20%;">氏名</div>
-            <div style="width:55%;" class="name">{{ name }}</div>
+            <div style="width:55%;" class="name">{{ name.substr( 0, 7 ) }}</div>
             <div style="width:20%;">得点</div>
             <div style="width:25%;"><span class="score">{{ score }}</span></div>
           </div>
@@ -58,7 +58,7 @@ export default {
           this.$router.push('/play')
           // location.reload()
         }
-      }) 
+      })
     }
   }
 }

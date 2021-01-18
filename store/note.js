@@ -11,7 +11,7 @@ export const getters = {
   blueNote: state => state.blueNote,
   yellowNote: state => state.yellowNote,
   greenNote: state => state.greenNote,
-  purpleNote: state => state.open,
+  purpleNote: state => state.purpleNote,
 }
 
 export const mutations = {
@@ -30,13 +30,18 @@ export const mutations = {
   purpleNoteOpen(state) {
     state.purpleNote = !state.purpleNote
   },
+  loginAfterNoteClose(state) {
+    state.redNote = false
+    state.blueNote = false
+    state.yellowNote = false
+  }
 }
 
 export const actions = {
   redNoteOpen({ commit }) {
     commit('redNoteOpen')
   },
-  blueNoteOpen({ commit }) {
+  blueNoteOpen({ commit, dispatch }) {
     commit('blueNoteOpen')
   },
   yellowNoteOpen({ commit }) {
@@ -47,5 +52,8 @@ export const actions = {
   },
   purpleNoteOpen({ commit }) {
     commit('purpleNoteOpen')
+  },
+  loginAfterNoteClose({ commit }) {
+    commit('loginAfterNoteClose')
   },
 }
