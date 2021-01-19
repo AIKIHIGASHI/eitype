@@ -9,23 +9,20 @@
       </div>
     </div>
     <div class="word-box">
-      <div class="word">{{newWords[index].word}}</div>
-      <div class="word-jp">{{newWords[index].translation}}</div>
+      <div class="word">{{newWords[index].name}}</div>
+      <div class="word-jp">{{newWords[index].description}}</div>
     </div>
     <div class="type-box">
       <div class="type">
         <span>{{ pressed }}<span style="color: white; opacity: 0.7;">{{ word }}</span></span>
-
       </div>
     </div>
-    <div class="next-word-box">Next : {{ newWords[index + 1].word }}</div>
+    <div class="next-word-box">Next : {{ newWords[index + 1].name }}</div>
   </div>
 </template>
 
 <script>
-import sound from '~/assets/sounds/wrong.mp3'
-import { mapActions } from 'vuex'
-
+import { mapGetters, mapActions } from 'vuex'
 export default {
   data() {
     return {
@@ -40,35 +37,30 @@ export default {
       time: 10,
       chars: [],
       newWords: [],
-      words: [
-        {word: 'about', translation: '〜について'},
-        {word: 'anyone', translation: '誰か'},
-        {word: 'anything', translation: '何か'},
-        {word: 'arrive', translation: '到着する'},
-        {word: 'art', translation: '芸術'},
-        {word: 'ask', translation: '尋ねる'},
-        {word: 'aunt', translation: 'おば'},
-        {word: 'back', translation: '後ろに'},
-        {word: 'bad', translation: '悪い'},
-        {word: 'beautiful', translation: '美しい'},
-      ]
+      // words: this.jsonWords
     }
   },
   async created() {
+    console.log(this.jsonWords)
     this.playing = false
     await this.startCountDown()
     this.playing = true
     console.log('スタート')
     this.shuffle()
-    this.countDown()
-    this.word = this.newWords[this.index].word
+    // this.countDown()
+    this.word = this.newWords[this.index].name
     addEventListener('keydown', this.keyDown)
+  },
+  computed: {
+    ...mapGetters('word', ['jsonWords'])
   },
   methods: {
     ...mapActions('word', ['pushAnsweredWord', ]),
     ...mapActions('score', ['incrementScore', ]),
     shuffle() {
-      const words = this.words
+      console.log(this.jsonWords)
+      const words = this.jsonWords
+      console.log(words)
       for (let i = words.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [words[j], words[i]] = [words[i], words[j]]
@@ -114,7 +106,7 @@ export default {
         this.correct = true
         this.pressed = ''
         this.index++
-        this.word = this.newWords[this.index].word
+        this.word = this.newWords[this.index].name
       }
     },
     countDown() {

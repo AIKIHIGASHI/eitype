@@ -1,9 +1,13 @@
+import jsonWords from '@/assets/json/words.json'
+
 export const state = () => ({
-  answeredWords: []
+  answeredWords: [],
+  jsonWords
 })
 
 export const getters = {
-  answeredWords: state => state.answeredWords
+  answeredWords: state => state.answeredWords,
+  jsonWords: state => state.jsonWords
 }
 
 export const mutations = {
