@@ -120,7 +120,7 @@ export default {
       'yellowNote',
       'greenNote',
       'purpleNote'
-    ])
+    ]),
   },
   methods: {
     ...mapActions('note', [

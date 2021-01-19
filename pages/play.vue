@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     ...mapActions('word', ['pushAnsweredWord', ]),
-    ...mapActions('user', ['incrementScore', ]),
+    ...mapActions('score', ['incrementScore', ]),
     shuffle() {
       const words = this.words
       for (let i = words.length - 1; i > 0; i--) {

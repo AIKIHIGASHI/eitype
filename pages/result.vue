@@ -12,7 +12,7 @@
           <div>解答用紙</div>
           <div class="name-box">
             <div style="width:20%;">氏名</div>
-            <div style="width:55%;" class="name">{{ name.substr( 0, 7 ) }}</div>
+            <div style="width:55%;" class="name">{{ name }}</div>
             <div style="width:20%;">得点</div>
             <div style="width:25%;"><span class="score">{{ score }}</span></div>
           </div>
@@ -45,15 +45,17 @@ export default {
     }
   },
   created() {
+    this.submitScore({ name: this.name, score: this.score})
     addEventListener('keydown', this.command)
   },
   computed: {
     ...mapGetters('word', ['answeredWords']),
-    ...mapGetters('user', ['name', 'score']),
+    ...mapGetters('user', ['name']),
+    ...mapGetters('score', ['score']),
   },
   methods: {
     ...mapActions('word', ['deleteAnsweredWord']),
-    ...mapActions('user', ['resetScore']),
+    ...mapActions('score', ['resetScore', 'submitScore']),
     command(e) {
       if (e.key === 'Enter') {
         console.log('result')

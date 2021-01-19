@@ -150,7 +150,8 @@ export default {
     }
   },
   created() {
-    console.log('created')
+    this.deleteScores()
+    this.getScore()
     this.getUser()
     addEventListener('keydown', this.play)
   },
@@ -178,6 +179,10 @@ export default {
     ...mapActions('user', [
       'getUser',
       'logout'
+    ]),
+    ...mapActions('score', [
+      'getScore',
+      'deleteScores'
     ]),
     play(e) {
       if (e.key === 'Enter') {

@@ -6,7 +6,7 @@ export const state = () => ({
 export const getters = {
   user: state => state.user,
   id: state => state.user.id,
-  name: state => state.user ? state.user.displayName : 'ゲスト',
+  name: state => state.user ? state.user.displayName.substr(0, 6) : 'ゲスト',
   score: state => state.score
 }
 

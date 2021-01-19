@@ -25,51 +25,30 @@
       <span
         :class="['page4' ,{open6: purpleNote}, purpleNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1]">
         <div class="heading">{{ title }}</div>
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
+        <div class="table-box">
+          <table>
+            <tr v-for="(score) in beforeScores" :key="score.id">
+              <td align="center">{{ score.rank }}位</td>
+              <td align="center">{{ score.name }}</td>
+              <td align="center">{{ score.score }}点</td>
+            </tr>
+          </table>
+        </div>
       </span>
       <span
         :class="['rear-cover', {rearCoverAfter: purpleNote}, purpleNote ? classNames.noteTransitionB : classNames.noteTransitionA]"/>
       <div :class="['note-index', {noteShadowInset: purpleNote}]">
         <div class="close" @click="purpleNoteOpen()">閉じる</div>
-        <div class="heading">ログイン後</div>
-        <div class="row">ログイン後、以下の機能を使用できます。</div>
-        <div class="row" />
-        <div class="row" />
-        <div class="row">
-          ☆
-          <span class="red">単語帳</span>☆
+        <div class="heading">&nbsp;</div>
+        <div class="table-box">
+          <table>
+            <tr v-for="(score) in afterScores" :key="score.id">
+              <td align="center">{{ score.rank }}位</td>
+              <td align="center">{{ score.name }}</td>
+              <td align="center">{{ score.score }}点</td>
+            </tr>
+          </table>
         </div>
-        <div class="row">今まで入力された英単語を単語帳に記録できます。</div>
-        <div class="row">たくさんプレイして単語帳を完成させましょう。</div>
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row">
-          ☆
-          <span class="red">ランキング</span>☆
-        </div>
-        <div class="row">各ユーザーの得点のランキングが表示されます。</div>
-        <div class="row">高得点を狙ってランキング上位を目指しましょう。</div>
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
       </div>
       <div :class="['note-shadow']" />
       <div
@@ -109,7 +88,11 @@ export default {
       'yellowNote',
       'greenNote',
       'purpleNote'
-    ])
+    ]),
+    ...mapGetters('score', [
+      'beforeScores',
+      'afterScores',
+    ]),
   },
   methods: {
     ...mapActions('note', [
@@ -148,17 +131,27 @@ $backCoverColor: #cf34fc;
   font-size: 30px;
   font-weight: bold;
   border-bottom: 1px solid #93c5d8;
-  margin: 30px 20px 15px;
+  margin: 30px 20px 20px;
   padding-bottom: 10px;
 }
 
-.row {
-  font-size: 13px;
-  border-bottom: 1px solid rgb(170, 170, 170);
-  margin: 0 25px;
-  height: 20px;
+.table-box {
+  padding: 0 20px;
+  color: gray;
+  table {
+  font-size: 20px;
+  border-collapse: collapse;
+  width: 100%;
   line-height: 20px;
   text-align: left;
+  tr {
+    height: 30px;
+    border-bottom: 1px solid rgb(170, 170, 170);
+    td {
+        padding: 6px 0px;
+    }
+  }
+}
 }
 
 .red {
@@ -200,7 +193,7 @@ $backCoverColor: #cf34fc;
     width: calc(100% - 30px);
     border-left: 30px solid $backCoverColor;
     h1 {
-      font-size: 70px;
+      font-size: 60px;
       color: black;
       margin-bottom: 80px;
     }
