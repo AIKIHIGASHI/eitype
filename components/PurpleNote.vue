@@ -27,7 +27,7 @@
         <div class="heading">{{ title }}</div>
         <div class="table-box">
           <table>
-            <tr v-for="(score) in beforeScores" :key="score.id">
+            <tr v-for="score in beforeScores" :key="score.id">
               <td align="center">{{ score.rank }}位</td>
               <td align="center">{{ score.name }}</td>
               <td align="center">{{ score.score }}点</td>
@@ -42,7 +42,7 @@
         <div class="heading">&nbsp;</div>
         <div class="table-box">
           <table>
-            <tr v-for="(score) in afterScores" :key="score.id">
+            <tr v-for="score in afterScores" :key="score.id">
               <td align="center">{{ score.rank }}位</td>
               <td align="center">{{ score.name }}</td>
               <td align="center">{{ score.score }}点</td>

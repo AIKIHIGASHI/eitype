@@ -22,7 +22,8 @@ export const mutations = {
     // ランク同率時の処理
     let rank = 1
     let count = 0
-    for (let i = 0; i < 20; i++) {
+    console.log(scores, scores.length)
+    for (let i = 0; i < scores.length - 1 ; i++) {
       count++
       scores[i].rank = rank
       if (scores[i].score !== scores[i + 1].score) {
@@ -34,7 +35,7 @@ export const mutations = {
     for (let i = 0; i < 10; i++) {
       state.beforeScores.push(scores[i])
     }
-    for (let i = 10; i < 20; i++) {
+    for (let i = 10; i < scores.length - 1; i++) {
       state.afterScores.push(scores[i])
     }
   },
@@ -55,6 +56,10 @@ export const actions = {
   },
   // 合計スコアをfirestoreに保存する
   submitScore({ commit }, score) {
+    if (score.name === 'ゲスト') {
+      console.log('ログインしていないのでスコアを送信しません')
+      return
+    }
     console.log('submitScore')
     this.$firestore.collection('score').add({ name: score.name, score: score.score})
       .then(() => {
@@ -67,7 +72,7 @@ export const actions = {
   // 各ユーザーのスコアを取得する(ランキング用)
   getScore({ commit }) {
     console.log('getScore')
-    this.$firestore.collection('score').orderBy('score', 'desc').get()
+    this.$firestore.collection('score').orderBy('score', 'desc').limit(21).get()
       .then((docs) => {
         console.log('getScore', docs)
         const scores = []
