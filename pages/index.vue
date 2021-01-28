@@ -151,8 +151,10 @@ export default {
   },
   created() {
     this.deleteScores()
+    this.deleteMyWords()
     this.getScore()
     this.getUser()
+    // this.getMyWords()
     addEventListener('keydown', this.play)
   },
   computed: {
@@ -184,7 +186,12 @@ export default {
       'getScore',
       'deleteScores'
     ]),
+    ...mapActions('word', [
+      'getMyWords',
+      'deleteMyWords'
+    ]),
     play(e) {
+      if (this.redNote || this.blueNote || this.yellowNote || this.greenNote || this.purpleNote) return
       if (e.key === 'Enter') {
         this.$store.commit('audio/chime1Play')
         removeEventListener('keydown', this.play)

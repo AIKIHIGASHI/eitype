@@ -11,21 +11,32 @@
         <div class="answer-sheet">
           <div>解答用紙</div>
           <div class="name-box">
-            <div style="width:20%;">氏名</div>
-            <div style="width:55%;" class="name">{{ name }}</div>
-            <div style="width:20%;">得点</div>
-            <div style="width:25%;"><span class="score">{{ score }}</span></div>
+            <div style="width: 20%">氏名</div>
+            <div style="width: 55%" class="name">{{ name }}</div>
+            <div style="width: 20%">得点</div>
+            <div style="width: 25%">
+              <span class="score">{{ score }}</span>
+            </div>
           </div>
           <div class="answers">
-            <table border="1" v-for="(word, index) in answeredWords" :key="word.id">
+            <table
+              border="1"
+              v-for="(word, index) in answeredWords"
+              :key="word.id">
               <thead>
                 <tr>
-                  <th>({{ index + 1 }}){{word.correct}}</th>
+                  <th>({{ index + 1 }}){{ word.correct }}</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><span class="circle" v-if="word.correct"/><span v-for="char in word.chars" :key="char.id"><span :class="{wrong: char.wrongChar}">{{ char.char }}</span></span></td>
+                  <td>
+                    <span class="circle" v-if="word.correct" /><span
+                      v-for="char in word.chars"
+                      :key="char.id"><span :class="{ wrong: char.wrongChar }">{{
+                        char.char
+                      }}</span></span>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -45,16 +56,17 @@ export default {
     }
   },
   created() {
-    this.submitScore({ name: this.name, score: this.score})
+    this.submitScore({ name: this.name, score: this.score })
+    this.submitAnsweredWord(this.id)
     addEventListener('keydown', this.command)
   },
   computed: {
     ...mapGetters('word', ['answeredWords']),
-    ...mapGetters('user', ['name']),
+    ...mapGetters('user', ['name', 'id']),
     ...mapGetters('score', ['score']),
   },
   methods: {
-    ...mapActions('word', ['deleteAnsweredWord']),
+    ...mapActions('word', ['deleteAnsweredWord', 'submitAnsweredWord']),
     ...mapActions('score', ['resetScore', 'submitScore']),
     command(e) {
       if (e.key === 'Enter') {
@@ -80,8 +92,8 @@ export default {
     title() {
       removeEventListener('keydown', this.command)
       this.$router.push('/')
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -126,7 +138,7 @@ section {
         display: flex;
         position: relative;
         .name {
-          font-family: 'Wawati SC';
+          font-family: "Wawati SC";
           color: gray;
         }
         .score {
@@ -160,7 +172,7 @@ section {
           font-size: 12px;
         }
         td {
-          font-family: 'Wawati SC';
+          font-family: "Wawati SC";
           color: gray;
           font-size: 15px;
           padding: 10px;

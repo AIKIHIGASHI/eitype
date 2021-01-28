@@ -20,6 +20,7 @@ export const actions = {
         console.log(result)
         console.log('twitterLogin成功')
         dispatch('note/loginAfterNoteClose', null, { root: true })
+        dispatch('word/submitAnsweredWord', result.user.uid, { root: true })
       })
       .catch((e) => {
         console.log(e.message)
@@ -34,6 +35,7 @@ export const actions = {
         console.log(result)
         console.log('googleLogin成功')
         dispatch('note/loginAfterNoteClose', null, { root: true })
+        dispatch('word/submitAnsweredWord', result.user.uid, { root: true })
       })
       .catch((e) => {
         console.log(e.message)
@@ -57,6 +59,7 @@ export const actions = {
       .then((result) => {
         console.log('新規登録成功', result)
         dispatch('note/loginAfterNoteClose', null, { root: true })
+        dispatch('word/submitAnsweredWord', result.user.uid, { root: true })
         console.log('updateProfile')
         result.user.updateProfile({
           displayName: user.name,

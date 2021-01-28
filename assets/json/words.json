@@ -1272,7 +1272,7 @@
     {
         "name": "sign",
         "a": "名詞／動詞",
-        "description": "署名／サインイン（sign in）する、サインアウト（sign out）する"
+        "description": "署名／サインイン（sign in）する"
     },
     {
         "name": "skip",

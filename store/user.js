@@ -5,8 +5,8 @@ export const state = () => ({
 
 export const getters = {
   user: state => state.user,
-  id: state => state.user.id,
-  name: state => state.user ? state.user.displayName.substr(0, 6) : 'ゲスト',
+  id: state => state.user ? state.user.uid : null,
+  name: state => state.user ? state.user.displayName : 'ゲスト',
   score: state => state.score
 }
 
@@ -34,7 +34,7 @@ export const actions = {
   resetScore({ commit }) {
     commit('resetScore')
   },
-  getUser({ commit }) {
+  getUser({ commit, dispatch }) {
     this.$fireAuth.onAuthStateChanged((user) => {
       if (!user) {
         console.log('userはいません')
@@ -42,6 +42,7 @@ export const actions = {
       }
       console.log('getUser', user)
       commit('getUser', user)
+      dispatch('word/getMyWords', user.uid, { root: true })
     })
   },
   logout({ commit }) {

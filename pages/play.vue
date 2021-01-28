@@ -47,7 +47,7 @@ export default {
     this.playing = true
     console.log('スタート')
     this.shuffle()
-    // this.countDown()
+    this.countDown()
     this.word = this.newWords[this.index].name
     addEventListener('keydown', this.keyDown)
   },
@@ -98,6 +98,8 @@ export default {
           this.incrementScore()
         }
         this.pushAnsweredWord({
+          created: new Date(),
+          description: this.newWords[this.index].description,
           answeredWord: this.pressed,
           correct: this.correct,
           chars: this.chars// : [{char: e.key, this.wrongChar: false}]

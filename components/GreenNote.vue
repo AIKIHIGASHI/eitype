@@ -24,58 +24,34 @@
       </span>
       <span
         :class="['page4' ,{open6: greenNote}, greenNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1]">
-        <div class="heading">遊び方</div>
-        <div class="row">
-          「
-          <span class="red">英タイプ</span>」は英単語学習型タイピングゲームです。
+        <div class="heading">{{title}}</div>
+        <div class="table-box">
+          <table v-if="myWordsBefore">
+            <tr v-for="myWord in myWordsBefore" :key="myWord.id">
+              <td align="center">{{myWord.word}}</td>
+              <td align="center" style="font-size: 15px;">{{myWord.description}}</td>
+            </tr>
+          </table>
         </div>
-        <div class="row" />
-        <div class="row">
-          ☆
-          <span class="red">ルール</span>☆
-        </div>
-        <div class="row">spaceキーでゲームスタート。</div>
-        <div class="row">始まったら画面中央に表示されている英単語を</div>
-        <div class="row">キーボードで入力しましょう。</div>
-        <div class="row" />
-        <div class="row">
-          ☆
-          <span class="red">制限時間</span>☆
-        </div>
-        <div class="row">プレイ画面右上に制限時間が表示されています。</div>
-        <div class="row">時間内にたくさん英単語を入力しましょう。</div>
-        <div class="row" />
-        <div class="row">
-          ☆
-          <span class="red">得点</span>☆
-        </div>
-        <div class="row">英単語を正しく入力できると10点の得点です。</div>
-        <div class="row">１文字でも間違えると得点は無しなので、</div>
-        <div class="row">落ち着いて入力しましょう。</div>
-        <div class="row">ゲーム終了後に採点結果が表示されます。</div>
       </span>
       <span
         :class="['rear-cover', {rearCoverAfter: greenNote}, greenNote ? classNames.noteTransitionB : classNames.noteTransitionA]"/>
       <div :class="['note-index', {noteShadowInset: greenNote}]">
         <div class="close" @click="greenNoteOpen()">閉じる</div>
-        <div class="heading">{{ title }}</div>
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
-        <div class="row" />
+        <div class="close sort" @click="sortToggle()" style="width: 120px;" v-if="sort">アルファベット順</div>
+        <div class="close sort" @click="sortToggle()" v-else>登録順</div>
+        <div class="heading">&nbsp;</div>
+        <div class="table-box">
+          <table>
+            <tr v-for="myWord in myWordsAfter" :key="myWord.id">
+              <td align="center">{{myWord.word}}</td>
+              <td align="center" style="font-size: 15px;">{{myWord.description}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="fusenn-box">
+        <div v-for="n in 15" :key="n" :class="['fusenn' + n, {width: fusenn[n - 1].bool}]" @click="fusennClick(n)"/>
       </div>
       <div :class="['note-shadow']" />
       <div
@@ -105,8 +81,15 @@ export default {
         pageTransitionB2: 'page-transitionB2',
         pageTransitionB3: 'page-transitionB3',
         pageTransitionB4: 'page-transitionB4'
-      }
+      },
     }
+  },
+  created() {
+    // this.sortMyWords()
+  },
+  mounted() {
+    console.log('mounted', this.myWordsBefore)
+    console.log('mounted', this.myWordsAfter)
   },
   computed: {
     ...mapGetters('note', [
@@ -115,7 +98,15 @@ export default {
       'yellowNote',
       'greenNote',
       'purpleNote'
-    ])
+    ]),
+    ...mapGetters('word', [
+      'jsonWords',
+      'myWords',
+      'myWordsBefore',
+      'myWordsAfter',
+      'fusenn',
+      'sort'
+    ]),
   },
   methods: {
     ...mapActions('note', [
@@ -123,8 +114,12 @@ export default {
       'blueNoteOpen',
       'yellowNoteOpen',
       'greenNoteOpen',
-      'purpleNoteOpen'
-    ])
+      'purpleNoteOpen',
+    ]),
+    ...mapActions('word', [
+      'fusennClick',
+      'sortToggle'
+    ]),
   }
 }
 </script>
@@ -146,9 +141,81 @@ export default {
   transform: rotateY(0deg) translateZ($index);
 }
 
+@mixin fusenn($color) {
+  width: 39px;
+  height: 24px;
+  margin-bottom: 1px;
+  opacity: 0.7;
+  background: $color;
+  transform: rotateY(180deg);
+  transform-origin: right;
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
 $thickness: rgb(231, 231, 231);
 $coverColor: #9BFFAE;
 $backCoverColor: #39E073;
+
+.fusenn-box {
+  width: 90px;
+  position: absolute;
+  top: 90px;
+  z-index: -10px;
+  right: -40px;
+}
+
+.fusenn1 {
+  @include fusenn(red);
+}
+.fusenn2 {
+  @include fusenn(rgb(255, 0, 212));
+}
+.fusenn3 {
+  @include fusenn(rgb(195, 0, 255));
+}
+.fusenn4 {
+  @include fusenn(rgb(111, 0, 255));
+}
+.fusenn5 {
+  @include fusenn(rgb(55, 0, 255));
+}
+.fusenn6 {
+  @include fusenn(rgb(0, 60, 255));
+}
+.fusenn7 {
+  @include fusenn(rgb(0, 153, 255));
+}
+.fusenn8 {
+  @include fusenn(rgb(0, 255, 157));
+}
+.fusenn9 {
+  @include fusenn(rgb(0, 216, 72));
+}
+.fusenn10 {
+  @include fusenn(rgb(0, 114, 19));
+}
+.fusenn11 {
+  @include fusenn(rgb(251, 253, 145));
+}
+.fusenn12 {
+  @include fusenn(rgb(229, 255, 0));
+}
+.fusenn13 {
+  @include fusenn(rgb(255, 136, 0));
+}
+.fusenn14 {
+  @include fusenn(rgb(148, 91, 91));
+}
+.fusenn15 {
+  @include fusenn(rgb(66, 66, 66));
+}
+
+.width {
+  width: 90px;
+  transform: rotateY(0deg);
+}
 
 .heading {
   font-size: 30px;
@@ -158,19 +225,24 @@ $backCoverColor: #39E073;
   padding-bottom: 10px;
 }
 
-.row {
-  font-size: 13px;
-  border-bottom: 1px solid rgb(170, 170, 170);
-  margin: 0 25px;
-  height: 20px;
-  line-height: 20px;
-  text-align: left;
+.table-box {
+  padding: 0 40px;
+  color: gray;
+  table {
+    font-size: 17px;
+    border-collapse: collapse;
+    width: 100%;
+    line-height: 20px;
+    text-align: left;
+    tr {
+      height: 30px;
+      border-bottom: 1px solid rgb(170, 170, 170);
+      td {
+        padding: 6px 0px;
+      }
+    }
+  }
 }
-
-.red {
-  color: red;
-}
-
 .note,
 .note-shadow {
   color: black;
@@ -310,6 +382,9 @@ $backCoverColor: #39E073;
   }
   .close:hover {
     color: #93c5d8;
+  }
+  .sort {
+    top: 45px
   }
 }
 

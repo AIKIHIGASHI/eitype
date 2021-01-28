@@ -1,50 +1,94 @@
 <template>
   <div>
     <div
-      :class="['note', {slide: purpleNote}, purpleNote ? classNames.noteTransitionB : classNames.noteTransitionA]">
+      :class="[
+        'note',
+        { slide: purpleNote },
+        purpleNote ? classNames.noteTransitionB : classNames.noteTransitionA,
+      ]">
       <span
-        :class="['cover', {open1: purpleNote}, purpleNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4]">
+        :class="[
+          'cover',
+          { open1: purpleNote },
+          purpleNote
+            ? classNames.pageTransitionB1
+            : classNames.pageTransitionA4,
+        ]">
         <h1>{{ title }}</h1>
         <div />
         <div />
       </span>
       <span
-        :class="['cover-back', {open2: purpleNote}, purpleNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4]"/>
+        :class="[
+          'cover-back',
+          { open2: purpleNote },
+          purpleNote
+            ? classNames.pageTransitionB1
+            : classNames.pageTransitionA4,
+        ]"/>
       <span
-        :class="['page1', {open3: purpleNote}, purpleNote ? classNames.pageTransitionB2 : classNames.pageTransitionA3]">
+        :class="[
+          'page1',
+          { open3: purpleNote },
+          purpleNote
+            ? classNames.pageTransitionB2
+            : classNames.pageTransitionA3,
+        ]">
         <InThePage />
       </span>
       <span
-        :class="['page2', {open4: purpleNote}, purpleNote ? classNames.pageTransitionB3 : classNames.pageTransitionA2]">
+        :class="[
+          'page2',
+          { open4: purpleNote },
+          purpleNote
+            ? classNames.pageTransitionB3
+            : classNames.pageTransitionA2,
+        ]">
         <InThePage />
       </span>
       <span
-        :class="['page3', {open5: purpleNote}, purpleNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1]">
+        :class="[
+          'page3',
+          { open5: purpleNote },
+          purpleNote
+            ? classNames.pageTransitionB4
+            : classNames.pageTransitionA1,
+        ]">
         <InThePage />
       </span>
       <span
-        :class="['page4' ,{open6: purpleNote}, purpleNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1]">
+        :class="[
+          'page4',
+          { open6: purpleNote },
+          purpleNote
+            ? classNames.pageTransitionB4
+            : classNames.pageTransitionA1,
+        ]">
         <div class="heading">{{ title }}</div>
         <div class="table-box">
           <table>
             <tr v-for="score in beforeScores" :key="score.id">
               <td align="center">{{ score.rank }}位</td>
-              <td align="center">{{ score.name }}</td>
+              <td align="center">{{ score.name.slice(0, 7) }}</td>
               <td align="center">{{ score.score }}点</td>
             </tr>
           </table>
         </div>
       </span>
       <span
-        :class="['rear-cover', {rearCoverAfter: purpleNote}, purpleNote ? classNames.noteTransitionB : classNames.noteTransitionA]"/>
-      <div :class="['note-index', {noteShadowInset: purpleNote}]">
+        :class="[
+          'rear-cover',
+          { rearCoverAfter: purpleNote },
+          purpleNote ? classNames.noteTransitionB : classNames.noteTransitionA,
+        ]"/>
+      <div :class="['note-index', { noteShadowInset: purpleNote }]">
         <div class="close" @click="purpleNoteOpen()">閉じる</div>
         <div class="heading">&nbsp;</div>
         <div class="table-box">
           <table>
             <tr v-for="score in afterScores" :key="score.id">
               <td align="center">{{ score.rank }}位</td>
-              <td align="center">{{ score.name }}</td>
+              <td align="center">{{ score.name.slice(0, 6) }}</td>
               <td align="center">{{ score.score }}点</td>
             </tr>
           </table>
@@ -52,7 +96,11 @@
       </div>
       <div :class="['note-shadow']" />
       <div
-        :class="['note-shadow', {noteShadowSlide: purpleNote}, purpleNote ? classNames.pageTransitionB2 : classNames.noteTransitionA]"/>
+        :class="[
+          'note-shadow',
+          { noteShadowSlide: purpleNote },
+          purpleNote ? classNames.pageTransitionB2 : classNames.noteTransitionA,
+        ]"/>
     </div>
   </div>
 </template>
@@ -62,7 +110,7 @@ import { mapGetters, mapActions } from 'vuex'
 import InThePage from '~/components/InThePage.vue'
 export default {
   components: {
-    InThePage
+    InThePage,
   },
   data() {
     return {
@@ -77,8 +125,8 @@ export default {
         pageTransitionB1: 'page-transitionB1',
         pageTransitionB2: 'page-transitionB2',
         pageTransitionB3: 'page-transitionB3',
-        pageTransitionB4: 'page-transitionB4'
-      }
+        pageTransitionB4: 'page-transitionB4',
+      },
     }
   },
   computed: {
@@ -87,11 +135,11 @@ export default {
       'blueNote',
       'yellowNote',
       'greenNote',
-      'purpleNote'
+      'purpleNote',
     ]),
     ...mapGetters('score', [
       'beforeScores',
-      'afterScores',
+      'afterScores'
     ]),
   },
   methods: {
@@ -100,9 +148,9 @@ export default {
       'blueNoteOpen',
       'yellowNoteOpen',
       'greenNoteOpen',
-      'purpleNoteOpen'
-    ])
-  }
+      'purpleNoteOpen',
+    ]),
+  },
 }
 </script>
 
@@ -139,23 +187,19 @@ $backCoverColor: #cf34fc;
   padding: 0 20px;
   color: gray;
   table {
-  font-size: 20px;
-  border-collapse: collapse;
-  width: 100%;
-  line-height: 20px;
-  text-align: left;
-  tr {
-    height: 30px;
-    border-bottom: 1px solid rgb(170, 170, 170);
-    td {
+    font-size: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    line-height: 20px;
+    text-align: left;
+    tr {
+      height: 30px;
+      border-bottom: 1px solid rgb(170, 170, 170);
+      td {
         padding: 6px 0px;
+      }
     }
   }
-}
-}
-
-.red {
-  color: red;
 }
 
 .note,
