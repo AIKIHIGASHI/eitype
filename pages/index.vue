@@ -154,7 +154,6 @@ export default {
     this.deleteMyWords()
     this.getScore()
     this.getUser()
-    // this.getMyWords()
     addEventListener('keydown', this.play)
   },
   computed: {
@@ -197,7 +196,7 @@ export default {
         removeEventListener('keydown', this.play)
         this.$router.push('/play')
       }
-    },
+    }
   },
 }
 </script>
@@ -271,11 +270,15 @@ export default {
 }
 
 .logo {
-  padding: 80px;
+  padding: 50px;
+  img {
+    width: 400px;
+    height: 200px;
+  }
 }
 
 .start-message {
-  font-size: 40px;
+  font-size: 35px;
   border-bottom: 2px solid;
   margin: 0 300px;
 }
