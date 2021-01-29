@@ -98,7 +98,6 @@ export default {
           this.incrementScore()
         }
         this.pushAnsweredWord({
-          created: new Date(),
           description: this.newWords[this.index].description,
           answeredWord: this.pressed,
           correct: this.correct,

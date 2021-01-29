@@ -82,7 +82,7 @@
     {
         "name": "base",
         "a": "形容詞／動詞",
-        "description": "ベースの、基底の／〜に基づく（based onで）"
+        "description": "ベースの、基底の／〜に基づく"
     },
     {
         "name": "bit",
@@ -217,7 +217,7 @@
     {
         "name": "commit",
         "a": "動詞",
-        "description": "コミットする、（処理などを）確定する"
+        "description": "処理などを）確定する"
     },
     {
         "name": "communication",
@@ -292,7 +292,7 @@
     {
         "name": "control",
         "a": "名詞／動詞",
-        "description": "制御、コントロール／制御する"
+        "description": "制御、コントロール"
     },
     {
         "name": "cookie",
@@ -362,7 +362,7 @@
     {
         "name": "default",
         "a": "名詞／動詞",
-        "description": "デフォルト値、既定値／デフォルトで〜になる"
+        "description": "デフォルト値、既定値"
     },
     {
         "name": "define",
@@ -417,7 +417,7 @@
     {
         "name": "document",
         "a": "名詞／動詞",
-        "description": "ドキュメント、文書／（文書で）記録する"
+        "description": "ドキュメント、文書"
     },
     {
         "name": "documentation",
@@ -592,7 +592,7 @@
     {
         "name": "format",
         "a": "名詞／動詞",
-        "description": "フォーマット、書式／初期化する"
+        "description": "フォーマット、書式"
     },
     {
         "name": "function",
@@ -1057,7 +1057,7 @@
     {
         "name": "pull",
         "a": "動詞／名詞",
-        "description": "プルする、取得する／プル"
+        "description": "プルする、取得する"
     },
     {
         "name": "push",
@@ -1107,7 +1107,7 @@
     {
         "name": "reference",
         "a": "名詞／動詞",
-        "description": "参照、リファレンス／参照する"
+        "description": "参照、リファレンス"
     },
     {
         "name": "release",
@@ -1212,7 +1212,7 @@
     {
         "name": "schedule",
         "a": "名詞／動詞",
-        "description": "予定、スケジュール／予定する"
+        "description": "予定、スケジュール"
     },
     {
         "name": "screen",
@@ -1272,7 +1272,7 @@
     {
         "name": "sign",
         "a": "名詞／動詞",
-        "description": "署名／サインイン（sign in）する"
+        "description": "署名／サインインする"
     },
     {
         "name": "skip",
@@ -1342,7 +1342,7 @@
     {
         "name": "support",
         "a": "動詞／名詞",
-        "description": "サポートする、支援する／サポート"
+        "description": "サポートする、支援する"
     },
     {
         "name": "switch",
@@ -1372,7 +1372,7 @@
     {
         "name": "target",
         "a": "名詞",
-        "description": "ターゲット、対象、〜先（移動先など）"
+        "description": "対象、〜先（移動先など）"
     },
     {
         "name": "task",

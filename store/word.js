@@ -48,7 +48,6 @@ export const mutations = {
     state.answeredWords = []
   },
   getMyWords(state, words) {
-    console.log('【2】【mutationsget】MyWords', words)
     state.myWords = words
   },
   deleteMyWords() {
@@ -149,7 +148,6 @@ export const mutations = {
       return 0
     })
     state.sortMyWords = words
-    console.log(words)
   },
   sortToggle(state) {
     state.sort = !state.sort
@@ -192,17 +190,37 @@ export const actions = {
       return
     }
     console.log('submitAnsweredWord')
-    console.log()
     const answeredWords = getters.answeredWords
+    const myWords = getters.myWords
     const words = []
-    answeredWords.forEach((word) => {
-      words.push({
-        word: word.answeredWord,
-        description: word.description,
-        created: word.created
-      })
-    })
-    console.log(words)
+
+    // answeredWords.forEach((word) => {
+    //   words.push({
+    //     word: word.answeredWord,
+    //     description: word.description,
+    //   })
+    // })
+    for (let i = 0; i < answeredWords.length; i++) {
+      let flag = true
+      for (let j = 0; j < myWords.length; j++) {
+        if (myWords[j].word !== undefined) {
+          if (answeredWords[i].answeredWord !== myWords[j].word) {
+            console.log(answeredWords[i].answeredWord, myWords[j].word, '違います')
+          } else {
+            console.log(answeredWords[i].answeredWord, myWords[j].word, '同じです')
+            flag = false
+          }
+        }
+      }
+      if (flag) {
+        console.log('違うのでpushします')
+        words.push({
+          word: answeredWords[i].answeredWord,
+          description: answeredWords[i].description
+        })
+      }
+    }
+    console.log('検索完了', words)
     this.$firestore.collection('words').doc(uid).set({words: this.$firebase.firestore.FieldValue.arrayUnion(...words)}, { merge: true })
       .then(() => {
         console.log('submitAnsweredWord成功')
