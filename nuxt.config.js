@@ -4,7 +4,7 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'eitype',
+    title: '英タイプ',
     meta: [
       {
         charset: 'utf-8',
