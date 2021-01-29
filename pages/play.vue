@@ -19,6 +19,7 @@
     </div>
     <div class="next-word-box">Next : {{ newWords[index + 1].name }}</div>
   </div>
+  <div class="message" v-else>{{ message }}</div>
 </template>
 
 <script>
@@ -34,13 +35,13 @@ export default {
       wrongChar: false,
       pressed: '',
       word: '',
+      message: '開始！',
       time: 10,
       chars: [],
       newWords: [],
     }
   },
   async created() {
-    console.log(this.jsonWords)
     this.playing = false
     await this.startCountDown()
     this.playing = true
@@ -135,6 +136,8 @@ export default {
       })
     },
     endCountDown() {
+      this.playing = false
+      this.message = '終了！'
       let count = 3
       return new Promise((resolve) => {
         const id = setInterval(() => {
@@ -191,5 +194,10 @@ export default {
 .next-word-box {
   width: 100%;
   padding-top: 100px;
+}
+
+.message {
+  font-size: 80px;
+  margin-top: 250px;
 }
 </style>
