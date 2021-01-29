@@ -9,8 +9,8 @@
       </div>
     </div>
     <div class="word-box">
-      <div class="word">{{newWords[index].name}}</div>
-      <div class="word-jp">{{newWords[index].description}}</div>
+      <div class="word">{{ newWords[index].name }}</div>
+      <div class="word-jp">{{ newWords[index].description }}</div>
     </div>
     <div class="type-box">
       <div class="type">
@@ -37,7 +37,6 @@ export default {
       time: 10,
       chars: [],
       newWords: [],
-      // words: this.jsonWords
     }
   },
   async created() {

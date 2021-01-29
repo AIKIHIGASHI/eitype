@@ -1,16 +1,3 @@
-export const state = () => ({
-  redNote: false,
-})
-
-export const getters = {
-  redNote: state => state.redNote,
-}
-
-export const mutations = {
-  redNoteOpen(state) {
-    state.redNote = !state.redNote
-  },
-}
 
 export const actions = {
   twitterLogin({ commit, dispatch }) {
@@ -47,10 +34,12 @@ export const actions = {
     this.$fireAuth.signInWithEmailAndPassword(user.email, user.password)
       .then((result) => {
         console.log('ログイン成功', result)
+        dispatch('error/deleteErrorMessage', null, { root: true })
         dispatch('note/loginAfterNoteClose', null, { root: true })
       })
       .catch((e) => {
         console.log('ログイン失敗', e.message)
+        dispatch('error/errorMessage', e, { root: true })
       })
   },
   register({ commit, dispatch }, user) {
@@ -66,6 +55,7 @@ export const actions = {
         })
           .then((result) => {
             console.log('名前設定完了', result)
+            dispatch('error/deleteErrorMessage', null, { root: true })
             dispatch('user/getUser', null, { root: true })
           })
           .catch((e) => {
@@ -74,6 +64,7 @@ export const actions = {
       })
       .catch((e) => {
         console.log('新規登録失敗', e.message)
+        dispatch('error/errorMessage', e, { root: true })
       })
   },
 
