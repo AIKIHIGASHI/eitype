@@ -5,14 +5,18 @@
       <div class="left-box">
         <div class="retry">&nbsp;&nbsp;&nbsp;&nbsp;リトライ : Enterキー</div>
         <div class="esc">タイトル : Escキー</div>
-        <span class="tweet">tweet</span>
+        <a
+          class="tweet"
+          :href="tweet "
+          target="_blank"><font-awesome-icon :icon="['fab', 'twitter']" />
+          結果をツイートする</a>
       </div>
       <div class="right-box">
         <div class="answer-sheet">
           <div>解答用紙</div>
           <div class="name-box">
             <div style="width: 20%">氏名</div>
-            <div style="width: 55%" class="name">{{ name }}</div>
+            <div style="width: 55%" class="name">{{ name.slice(0, 6) }}</div>
             <div style="width: 20%">得点</div>
             <div style="width: 25%">
               <span class="score">{{ score }}</span>
@@ -25,7 +29,7 @@
               :key="word.id">
               <thead>
                 <tr>
-                  <th>({{ index + 1 }}){{ word.correct }}</th>
+                  <th>({{ index + 1 }})</th>
                 </tr>
               </thead>
               <tbody>
@@ -56,6 +60,7 @@ export default {
     }
   },
   created() {
+    console.log(this.score)
     this.submitScore({ name: this.name, score: this.score })
     this.submitAnsweredWord(this.id)
     addEventListener('keydown', this.command)
@@ -64,6 +69,12 @@ export default {
     ...mapGetters('word', ['answeredWords']),
     ...mapGetters('user', ['name', 'id']),
     ...mapGetters('score', ['score']),
+    tweet() {
+      return 'https://twitter.com/intent/tweet?text='+
+      encodeURIComponent(
+        '今回の点数は' + this.score + '点でした！お疲れさまです！' + '\nhttps://eitype-dc9f3.web.app/\n'
+      ) + '&hashtags=英タイプ'
+    }
   },
   methods: {
     ...mapActions('word', ['deleteAnsweredWord', 'submitAnsweredWord']),
@@ -114,10 +125,16 @@ section {
       padding-top: 20px;
     }
     .tweet {
-      padding-top: 90px;
+      margin-top: 90px;
       display: inline-block;
       color: rgba(135, 207, 235, 0.705);
-      border-bottom: 2px solid;
+      border-bottom: 0px solid;
+      text-decoration: none;
+      opacity: 0.7;
+      &:hover {
+        opacity: 1;
+        border-bottom: 2px solid;
+      }
     }
   }
   .right-box {
@@ -131,6 +148,7 @@ section {
       background: rgb(255, 255, 255);
       color: black;
       padding: 10px;
+      box-shadow: 20px 20px rgba(0, 0, 0, 0.63);
       .name-box {
         border: 2px solid black;
         margin: 5px 0px 20px;
