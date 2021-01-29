@@ -43,9 +43,11 @@ export const actions = {
   },
   blueNoteOpen({ commit, dispatch }) {
     commit('blueNoteOpen')
+    dispatch('error/deleteErrorMessage', null, { root: true })
   },
   yellowNoteOpen({ commit }) {
     commit('yellowNoteOpen')
+    dispatch('error/deleteErrorMessage', null, { root: true })
   },
   greenNoteOpen({ commit }) {
     commit('greenNoteOpen')
