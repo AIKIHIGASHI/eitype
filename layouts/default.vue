@@ -6,8 +6,7 @@
       <div>{{ new Date().getDate()}}日</div>
       <h1/>
       <div>日直</div>
-      <div class="name">{{ name }}</div>
-
+      <div class="name">{{ name.slice(0, 6) }}</div>
     </div>
     <div class="container-bottom"/>
   </div>
@@ -19,9 +18,6 @@ export default {
   computed: {
     ...mapGetters('user', ['user', 'name']),
   },
-  created() {
-    console.log(this.name)
-  }
 }
 </script>
 
@@ -43,6 +39,7 @@ body {
   background-color: black;
   color: rgba(255, 255, 255, 0.6);
   font-size: 25px;
+  transform: scale(0.95, 0.95);
 }
 
 .container {
@@ -61,12 +58,14 @@ body {
     position: absolute;
     top: 0;
     right: 10px;
-    padding-top: 130px;
+    padding-top: 110px;
     text-align: center;
     .name {
       word-wrap: break-word;
       width: 10px;
+      margin-top: 15px;
       margin-left: 5px;
+      font-size: 28px;
     }
   }
   .container-bottom {

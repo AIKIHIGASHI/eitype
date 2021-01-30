@@ -25,7 +25,7 @@
       <span
         :class="['page4' ,{open6: blueNote}, blueNote ? className.pageTransitionB4 : className.pageTransitionA1]">
         <div class="heading">{{ title }}</div>
-
+        <div class="error">{{ errorMessage }}</div>
         <form @submit="submit()">
           <div class="form-box">
             <div class="email">
@@ -36,7 +36,8 @@
               <div><font-awesome-icon icon = "lock" /> パスワード</div>
               <input type="text" v-model="password">
             </div>
-            <button type="submit">{{ title }}</button>
+            <button class="not-submit" type="button" v-if="!email || !password">{{ title }}</button>
+            <button class="submit" type="submit" v-else>{{ title }}</button>
           </div>
         </form>
       </span>
@@ -99,6 +100,9 @@ export default {
       'greenNote',
       'purpleNote'
     ]),
+    ...mapGetters('error', [
+      'errorMessage'
+    ])
   },
   methods: {
     ...mapActions('note', [
@@ -148,6 +152,16 @@ $backCoverColor: #5f8aff;
   border-bottom: 1px solid #93c5d8;
   margin: 30px 20px 15px;
   padding-bottom: 10px;
+}
+
+.error {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  color: rgb(255, 112, 112);
+  font-size: 15px;
 }
 
 .note,
@@ -292,6 +306,14 @@ $backCoverColor: #5f8aff;
       padding: 0;
       &:hover {
         color: #93c5d8;
+      }
+    }
+    .not-submit {
+      border-bottom: 1px solid gray;
+      opacity: 0.3;
+      cursor: unset;
+      &:hover {
+        color: gray;
       }
     }
   }

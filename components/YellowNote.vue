@@ -1,68 +1,130 @@
 <template>
   <div>
     <div
-      :class="['note', {slide: yellowNote}, yellowNote ? className.noteTransitionB : className.noteTransitionA]">
+      :class="[
+        'note',
+        { slide: yellowNote },
+        yellowNote ? className.noteTransitionB : className.noteTransitionA,
+      ]">
       <span
-        :class="['cover', {open1: yellowNote}, yellowNote ? className.pageTransitionB1 : className.pageTransitionA4]">
+        :class="[
+          'cover',
+          { open1: yellowNote },
+          yellowNote ? className.pageTransitionB1 : className.pageTransitionA4,
+        ]">
         <h1>{{ title }}</h1>
-        <div/>
-        <div/>
+        <div />
+        <div />
       </span>
       <span
-        :class="['cover-back', {open2: yellowNote}, yellowNote ? className.pageTransitionB1 : className.pageTransitionA4]"/>
+        :class="[
+          'cover-back',
+          { open2: yellowNote },
+          yellowNote ? className.pageTransitionB1 : className.pageTransitionA4,
+        ]"/>
       <span
-        :class="['page1', {open3: yellowNote}, yellowNote ? className.pageTransitionB2 : className.pageTransitionA3]">
-        <InThePage/>
+        :class="[
+          'page1',
+          { open3: yellowNote },
+          yellowNote ? className.pageTransitionB2 : className.pageTransitionA3,
+        ]">
+        <InThePage />
       </span>
       <span
-        :class="['page2', {open4: yellowNote}, yellowNote ? className.pageTransitionB3 : className.pageTransitionA2]">
-        <InThePage/>
+        :class="[
+          'page2',
+          { open4: yellowNote },
+          yellowNote ? className.pageTransitionB3 : className.pageTransitionA2,
+        ]">
+        <InThePage />
       </span>
       <span
-        :class="['page3', {open5: yellowNote}, yellowNote ? className.pageTransitionB4 : className.pageTransitionA1]">
-        <InThePage/>
+        :class="[
+          'page3',
+          { open5: yellowNote },
+          yellowNote ? className.pageTransitionB4 : className.pageTransitionA1,
+        ]">
+        <InThePage />
       </span>
       <span
-        :class="['page4' ,{open6: yellowNote}, yellowNote ? className.pageTransitionB4 : className.pageTransitionA1]">
+        :class="[
+          'page4',
+          { open6: yellowNote },
+          yellowNote ? className.pageTransitionB4 : className.pageTransitionA1,
+        ]">
         <div class="heading">{{ title }}</div>
-
+        <div class="error">{{ errorMessage }}</div>
+        <div class="error" v-if="userName.length > 6">
+          ユーザー名は6文字以下です
+        </div>
+        <div class="error" v-if="password && password.length < 6">
+          パスワードは6文字以上です
+        </div>
         <form @submit="submit()">
           <div class="form-box">
             <div class="form">
-              <div><font-awesome-icon icon = "user" /> ユーザー名</div>
-              <input type="text" v-model="userName">
+              <div><font-awesome-icon icon="user" /> ユーザー名</div>
+              <input type="text" v-model="userName" >
             </div>
             <div class="form">
-              <div><font-awesome-icon icon = "envelope" /> E-mail</div>
-              <input type="text" v-model="email">
+              <div><font-awesome-icon icon="envelope" /> E-mail</div>
+              <input type="text" v-model="email" >
             </div>
             <div class="form">
-              <div><font-awesome-icon icon = "lock" /> パスワード</div>
-              <input type="text" v-model="password">
+              <div><font-awesome-icon icon="lock" /> パスワード</div>
+              <input type="text" v-model="password" >
             </div>
-            <button type="submit">{{ title }}</button>
+            <button
+              class="not-submit"
+              type="button"
+              v-if="
+                !email ||
+                !password ||
+                !userName ||
+                userName.length > 6 ||
+                password.length < 6
+              ">
+              {{ title }}
+            </button>
+            <button class="submit" type="submit" v-else>{{ title }}</button>
           </div>
         </form>
       </span>
       <span
-        :class="['rear-cover', {rearCoverAfter: yellowNote}, yellowNote ? className.noteTransitionB : className.noteTransitionA]"/>
-      <div :class="['note-index', {noteShadowInset: yellowNote}]">
+        :class="[
+          'rear-cover',
+          { rearCoverAfter: yellowNote },
+          yellowNote ? className.noteTransitionB : className.noteTransitionA,
+        ]"/>
+      <div :class="['note-index', { noteShadowInset: yellowNote }]">
         <div class="close" @click="yellowNoteOpen()">閉じる</div>
         <div class="heading">&nbsp;</div>
-        <span class="shadow1" v-if="hover1"/>
-        <div class="twitter" @mouseover="hover1 = false" @mouseleave="hover1 = true" @click="twitterLogin()">
+        <span class="shadow1" v-if="hover1" />
+        <div
+          class="twitter"
+          @mouseover="hover1 = false"
+          @mouseleave="hover1 = true"
+          @click="twitterLogin()">
           <div>Twitterアカウントで</div>
           <div>{{ title }}</div>
         </div>
-        <span class="shadow2" v-if="hover2"/>
-        <div class="google" @mouseover="hover2 = false" @mouseleave="hover2 = true" @click="googleLogin()">
+        <span class="shadow2" v-if="hover2" />
+        <div
+          class="google"
+          @mouseover="hover2 = false"
+          @mouseleave="hover2 = true"
+          @click="googleLogin()">
           <div>Googleアカウントで</div>
           <div>{{ title }}</div>
         </div>
       </div>
-      <div :class="['note-shadow']"/>
+      <div :class="['note-shadow']" />
       <div
-        :class="['note-shadow', {noteShadowSlide: yellowNote}, yellowNote ? className.pageTransitionB2 : className.noteTransitionA]"/>
+        :class="[
+          'note-shadow',
+          { noteShadowSlide: yellowNote },
+          yellowNote ? className.pageTransitionB2 : className.noteTransitionA,
+        ]"/>
     </div>
   </div>
 </template>
@@ -72,7 +134,7 @@ import { mapGetters, mapActions } from 'vuex'
 import InThePage from '~/components/InThePage.vue'
 export default {
   components: {
-    InThePage
+    InThePage,
   },
   data() {
     return {
@@ -92,8 +154,8 @@ export default {
         pageTransitionB1: 'page-transitionB1',
         pageTransitionB2: 'page-transitionB2',
         pageTransitionB3: 'page-transitionB3',
-        pageTransitionB4: 'page-transitionB4'
-      }
+        pageTransitionB4: 'page-transitionB4',
+      },
     }
   },
   computed: {
@@ -102,8 +164,9 @@ export default {
       'blueNote',
       'yellowNote',
       'greenNote',
-      'purpleNote'
+      'purpleNote',
     ]),
+    ...mapGetters('error', ['errorMessage']),
   },
   methods: {
     ...mapActions('note', [
@@ -111,18 +174,18 @@ export default {
       'blueNoteOpen',
       'yellowNoteOpen',
       'greenNoteOpen',
-      'purpleNoteOpen'
+      'purpleNoteOpen',
     ]),
-    ...mapActions('auth', [
-      'twitterLogin',
-      'googleLogin',
-      'register',
-    ]),
+    ...mapActions('auth', ['twitterLogin', 'googleLogin', 'register']),
     submit() {
       event.preventDefault()
-      this.register({name: this.userName, email: this.email, password: this.password})
-    }
-  }
+      this.register({
+        name: this.userName,
+        email: this.email,
+        password: this.password,
+      })
+    },
+  },
 }
 </script>
 
@@ -144,8 +207,8 @@ export default {
 }
 
 $thickness: rgb(231, 231, 231);
-$coverColor: #FFD77C;
-$backCoverColor: #FFA700;
+$coverColor: #ffd77c;
+$backCoverColor: #ffa700;
 
 .heading {
   font-size: 30px;
@@ -153,6 +216,16 @@ $backCoverColor: #FFA700;
   border-bottom: 1px solid #93c5d8;
   margin: 30px 20px 15px;
   padding-bottom: 10px;
+}
+
+.error {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  color: rgb(255, 112, 112);
+  font-size: 15px;
 }
 
 .note,
@@ -288,12 +361,20 @@ $backCoverColor: #FFA700;
       border: none;
       border-bottom: 1px solid #93c5d8;
       width: 80px;
-      margin-top: 30px;
+      margin-top: 50px;
       cursor: pointer;
       outline: none;
       padding: 0;
       &:hover {
         color: #93c5d8;
+      }
+    }
+    .not-submit {
+      border-bottom: 1px solid gray;
+      opacity: 0.3;
+      cursor: unset;
+      &:hover {
+        color: gray;
       }
     }
   }
@@ -332,16 +413,16 @@ $backCoverColor: #FFA700;
     }
   }
   .shadow1 {
-      width: 215px;
-      height: 70px;
-      background: rgb(255, 255, 255);
-      position: absolute;
-      top: 158px;
-      right: 62px;
-      box-shadow: 0 5px 5px #555;
-      transform: rotate(1deg);
-      z-index: 1px;
-    }
+    width: 215px;
+    height: 70px;
+    background: rgb(255, 255, 255);
+    position: absolute;
+    top: 158px;
+    right: 62px;
+    box-shadow: 0 5px 5px #555;
+    transform: rotate(1deg);
+    z-index: 1px;
+  }
   .twitter {
     width: 250px;
     height: 80px;
@@ -359,17 +440,16 @@ $backCoverColor: #FFA700;
     }
   }
   .shadow2 {
-      width: 210px;
-      height: 70px;
-      background: rgb(255, 255, 255);
-      position: absolute;
-      top: 308px;
-      right: 62px;
-      box-shadow: 0 5px 5px #555;
-      transform: rotate(1deg);
-      z-index: 1px;
-
-    }
+    width: 210px;
+    height: 70px;
+    background: rgb(255, 255, 255);
+    position: absolute;
+    top: 308px;
+    right: 62px;
+    box-shadow: 0 5px 5px #555;
+    transform: rotate(1deg);
+    z-index: 1px;
+  }
   .google {
     margin: 0 auto;
     width: 250px;

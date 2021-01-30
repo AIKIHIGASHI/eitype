@@ -3,29 +3,44 @@
     <section>〜結果発表〜</section>
     <div class="result-box">
       <div class="left-box">
-        <div class="retry">&nbsp;&nbsp;&nbsp;&nbsp;リトライ : Spaceキー</div>
+        <div class="retry">&nbsp;&nbsp;&nbsp;&nbsp;リトライ : Enterキー</div>
         <div class="esc">タイトル : Escキー</div>
-        <span class="tweet">tweet</span>
+        <a
+          class="tweet"
+          :href="tweet "
+          target="_blank"><font-awesome-icon :icon="['fab', 'twitter']" />
+          結果をツイートする</a>
       </div>
       <div class="right-box">
         <div class="answer-sheet">
           <div>解答用紙</div>
           <div class="name-box">
-            <div style="width:20%;">氏名</div>
-            <div style="width:55%;" class="name">{{ name.substr( 0, 7 ) }}</div>
-            <div style="width:20%;">得点</div>
-            <div style="width:25%;"><span class="score">{{ score }}</span></div>
+            <div style="width: 20%">氏名</div>
+            <div style="width: 55%" class="name">{{ name.slice(0, 6) }}</div>
+            <div style="width: 20%">得点</div>
+            <div style="width: 25%">
+              <span class="score">{{ score }}</span>
+            </div>
           </div>
           <div class="answers">
-            <table border="1" v-for="(word, index) in answeredWords" :key="word.id">
+            <table
+              border="1"
+              v-for="(word, index) in answeredWords"
+              :key="word.id">
               <thead>
                 <tr>
-                  <th>({{ index + 1 }}){{word.correct}}</th>
+                  <th>({{ index + 1 }})</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><span class="circle" v-if="word.correct"/><span v-for="char in word.chars" :key="char.id"><span :class="{wrong: char.wrongChar}">{{ char.char }}</span></span></td>
+                  <td>
+                    <span class="circle" v-if="word.correct" /><span
+                      v-for="char in word.chars"
+                      :key="char.id"><span :class="{ wrong: char.wrongChar }">{{
+                        char.char
+                      }}</span></span>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -33,34 +48,60 @@
         </div>
       </div>
     </div>
-    <div/>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 export default {
+  data() {
+    return {
+      chime2: new Audio(require('~/assets/sounds/chime2.mp3')),
+    }
+  },
   created() {
-    this.retry()
+    this.submitScore({ name: this.name, score: this.score })
+    this.submitAnsweredWord(this.id)
+    addEventListener('keydown', this.command)
   },
   computed: {
     ...mapGetters('word', ['answeredWords']),
-    ...mapGetters('user', ['name', 'score']),
+    ...mapGetters('user', ['name', 'id']),
+    ...mapGetters('score', ['score']),
+    tweet() {
+      return 'https://twitter.com/intent/tweet?text='+
+      encodeURIComponent(
+        '今回の点数は' + this.score + '点でした！お疲れさまです！' + '\nhttps://eitype-dc9f3.web.app/\n'
+      ) + '&hashtags=英タイプ'
+    }
   },
   methods: {
-    ...mapActions('word', ['deleteAnsweredWord']),
-    ...mapActions('user', ['resetScore']),
+    ...mapActions('word', ['deleteAnsweredWord', 'submitAnsweredWord']),
+    ...mapActions('score', ['resetScore', 'submitScore']),
+    command(e) {
+      if (e.key === 'Enter') {
+        this.deleteAnsweredWord()
+        this.resetScore()
+        this.$store.commit('audio/chime2Stop')
+        this.$store.commit('audio/chime1Play')
+        this.retry()
+      }
+      if (e.key === 'Escape') {
+        this.$store.commit('audio/chime2Stop')
+        this.deleteAnsweredWord()
+        this.resetScore()
+        this.title()
+      }
+    },
     retry() {
-      addEventListener('keydown', (e) => {
-        if (e.key === ' ') {
-          this.deleteAnsweredWord()
-          this.resetScore()
-          this.$router.push('/play')
-          // location.reload()
-        }
-      })
-    }
-  }
+      removeEventListener('keydown', this.command)
+      this.$router.push('/play')
+    },
+    title() {
+      removeEventListener('keydown', this.command)
+      this.$router.push('/')
+    },
+  },
 }
 </script>
 
@@ -81,10 +122,16 @@ section {
       padding-top: 20px;
     }
     .tweet {
-      padding-top: 90px;
+      margin-top: 90px;
       display: inline-block;
       color: rgba(135, 207, 235, 0.705);
-      border-bottom: 2px solid;
+      border-bottom: 0px solid;
+      text-decoration: none;
+      opacity: 0.7;
+      &:hover {
+        opacity: 1;
+        border-bottom: 2px solid;
+      }
     }
   }
   .right-box {
@@ -98,6 +145,7 @@ section {
       background: rgb(255, 255, 255);
       color: black;
       padding: 10px;
+      box-shadow: 20px 20px rgba(0, 0, 0, 0.63);
       .name-box {
         border: 2px solid black;
         margin: 5px 0px 20px;
@@ -105,7 +153,7 @@ section {
         display: flex;
         position: relative;
         .name {
-          font-family: 'Wawati SC';
+          font-family: "Wawati SC";
           color: gray;
         }
         .score {
@@ -139,7 +187,7 @@ section {
           font-size: 12px;
         }
         td {
-          font-family: 'Wawati SC';
+          font-family: "Wawati SC";
           color: gray;
           font-size: 15px;
           padding: 10px;
