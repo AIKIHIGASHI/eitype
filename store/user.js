@@ -22,7 +22,6 @@ export const mutations = {
 
   },
   deleteUser(state) {
-    console.log('deleteUser')
     state.user = null
   }
 }
@@ -36,20 +35,14 @@ export const actions = {
   },
   getUser({ commit, dispatch }) {
     this.$fireAuth.onAuthStateChanged((user) => {
-      if (!user) {
-        console.log('userはいません')
-        return
-      }
-      console.log('getUser', user)
+      if (!user) return
       commit('getUser', user)
       dispatch('word/getMyWords', user.uid, { root: true })
     })
   },
   logout({ commit }) {
-    console.log('logout')
     this.$fireAuth.signOut()
       .then(() => {
-        console.log('ログアウト成功')
         commit('deleteUser')
       })
       .catch((e) => {

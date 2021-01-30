@@ -52,30 +52,17 @@ export const actions = {
     commit('resetScore')
   },
   // 合計スコアをfirestoreに保存する
-  submitScore({ commit, getters}, score) {
-    if (score.name === 'ゲスト') {
-      console.log('ログインしていないのでスコアを送信しません')
-      return
-    }
+  submitScore({ getters}, score) {
+    if (score.name === 'ゲスト') return
     const scores = getters.scores
-    console.log(scores, score)
     let flag = false
     for (let i = 0; i < scores.length; i++) {
-      console.log(scores[i].score + '<=' + score.score)
       if (scores[i].score <= score.score) {
         flag = true
-        console.log(flag)
       }
     }
-    if (!flag) {
-      console.log('記録更新しないので送信しません')
-      return
-    }
-    console.log('submitScore')
+    if (!flag) return
     this.$firestore.collection('score').add({ name: score.name, score: score.score})
-      .then(() => {
-        console.log('submitScore成功')
-      })
       .catch((e) => {
         console.log('submitScore失敗', e.message)
       })
@@ -84,7 +71,6 @@ export const actions = {
   getScore({ commit }) {
     this.$firestore.collection('score').orderBy('score', 'desc').limit(21).get()
       .then((docs) => {
-        console.log('getScore成功', docs.exists)
         const scores = []
         docs.forEach((doc) => {
           scores.push(doc.data())

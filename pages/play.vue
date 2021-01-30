@@ -36,7 +36,7 @@ export default {
       pressed: '',
       word: '',
       message: '開始！',
-      time: 10,
+      time: 60,
       chars: [],
       newWords: [],
     }
@@ -45,7 +45,6 @@ export default {
     this.playing = false
     await this.startCountDown()
     this.playing = true
-    console.log('スタート')
     this.shuffle()
     this.countDown()
     this.word = this.newWords[this.index].name
@@ -58,9 +57,7 @@ export default {
     ...mapActions('word', ['pushAnsweredWord', ]),
     ...mapActions('score', ['incrementScore', ]),
     shuffle() {
-      console.log(this.jsonWords)
       const words = this.jsonWords
-      console.log(words)
       for (let i = words.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [words[j], words[i]] = [words[i], words[j]]
@@ -69,7 +66,6 @@ export default {
     },
     keyDown(e) {
       if (e.key === 'Escape') {
-        console.log('エスケープ')
         removeEventListener('keydown', this.keyDown)
         clearInterval(this.id)
         this.$router.push('/')
@@ -87,13 +83,11 @@ export default {
       const collect = new Audio(require('~/assets/sounds/collect.mp3'))
       collect.play()
       collect.volume = 0.3
-      console.log(e.key)
       this.chars.push({char: e.key, wrongChar: this.wrongChar})
       this.wrongChar = false
       this.pressed += e.key
       this.word = this.word.slice(1)
       if (this.word.length === 0) { // 文字を入力し終えたときの処理
-        console.log('【pushAnsweredWord実行】')
         if (this.correct) {
           this.incrementScore()
         }
@@ -117,7 +111,6 @@ export default {
           clearInterval(this.id)
           this.$store.commit('audio/chime2Play')
           await this.endCountDown()
-          console.log('result画面へ')
           this.$router.push('/result')
         }
       }, 1000)
@@ -127,7 +120,6 @@ export default {
       return new Promise((resolve) => {
         const id = setInterval(() => {
           count--
-          console.log(count)
           if (count <= 0) {
             clearInterval(id)
             resolve()
@@ -143,7 +135,6 @@ export default {
         const id = setInterval(() => {
           removeEventListener('keydown', this.keyDown)
           count--
-          console.log(count)
           if (count <= 0) {
             clearInterval(id)
             resolve()

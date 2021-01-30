@@ -264,11 +264,6 @@ export default {
   }
 }
 
-.img:active {
-  width: 140px;
-  height: 140px;
-}
-
 .logo {
   padding: 50px;
   img {

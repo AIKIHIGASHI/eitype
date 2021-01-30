@@ -29,7 +29,7 @@
           <table v-if="myWordsBefore">
             <tr v-for="myWord in myWordsBefore" :key="myWord.id">
               <td align="center">{{myWord.word}}</td>
-              <td align="center" style="font-size: 15px;">{{myWord.description}}</td>
+              <td align="center" style="font-size: 13px;">{{myWord.description}}</td>
             </tr>
           </table>
         </div>
@@ -45,7 +45,7 @@
           <table>
             <tr v-for="myWord in myWordsAfter" :key="myWord.id">
               <td align="center">{{myWord.word}}</td>
-              <td align="center" style="font-size: 15px;">{{myWord.description}}</td>
+              <td align="center" style="font-size: 13px;">{{myWord.description}}</td>
             </tr>
           </table>
         </div>
@@ -83,13 +83,6 @@ export default {
         pageTransitionB4: 'page-transitionB4'
       },
     }
-  },
-  created() {
-    // this.sortMyWords()
-  },
-  mounted() {
-    console.log('mounted', this.myWordsBefore)
-    console.log('mounted', this.myWordsAfter)
   },
   computed: {
     ...mapGetters('note', [
@@ -226,7 +219,7 @@ $backCoverColor: #39E073;
 }
 
 .table-box {
-  padding: 0 40px;
+  padding: 0 25px;
   color: gray;
   table {
     font-size: 17px;

@@ -60,7 +60,6 @@ export default {
     }
   },
   created() {
-    console.log(this.score)
     this.submitScore({ name: this.name, score: this.score })
     this.submitAnsweredWord(this.id)
     addEventListener('keydown', this.command)
@@ -81,7 +80,6 @@ export default {
     ...mapActions('score', ['resetScore', 'submitScore']),
     command(e) {
       if (e.key === 'Enter') {
-        console.log('result')
         this.deleteAnsweredWord()
         this.resetScore()
         this.$store.commit('audio/chime2Stop')
@@ -89,7 +87,6 @@ export default {
         this.retry()
       }
       if (e.key === 'Escape') {
-        console.log('result')
         this.$store.commit('audio/chime2Stop')
         this.deleteAnsweredWord()
         this.resetScore()

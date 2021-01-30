@@ -1,11 +1,9 @@
 
 export const actions = {
-  twitterLogin({ commit, dispatch }) {
+  twitterLogin({ dispatch }) {
     const provider = new this.$firebase.auth.TwitterAuthProvider()
     this.$fireAuth.signInWithPopup(provider)
       .then((result) => {
-        console.log(result)
-        console.log('twitterLogin成功')
         dispatch('note/loginAfterNoteClose', null, { root: true })
         dispatch('word/submitAnsweredWord', result.user.uid, { root: true })
       })
@@ -14,13 +12,11 @@ export const actions = {
         console.log('twitterLogin失敗')
       })
   },
-  googleLogin({ commit, dispatch }) {
+  googleLogin({ dispatch }) {
     console.log('test')
     const provider = new this.$firebase.auth.GoogleAuthProvider()
     this.$fireAuth.signInWithPopup(provider)
       .then((result) => {
-        console.log(result)
-        console.log('googleLogin成功')
         dispatch('note/loginAfterNoteClose', null, { root: true })
         dispatch('word/submitAnsweredWord', result.user.uid, { root: true })
       })
@@ -29,11 +25,9 @@ export const actions = {
         console.log('googleLogin失敗')
       })
   },
-  login({ commit, dispatch }, user) {
-    console.log('login')
+  login({ dispatch }, user) {
     this.$fireAuth.signInWithEmailAndPassword(user.email, user.password)
-      .then((result) => {
-        console.log('ログイン成功', result)
+      .then(() => {
         dispatch('error/deleteErrorMessage', null, { root: true })
         dispatch('note/loginAfterNoteClose', null, { root: true })
       })
@@ -42,24 +36,21 @@ export const actions = {
         dispatch('error/errorMessage', e, { root: true })
       })
   },
-  register({ commit, dispatch }, user) {
-    console.log('Register', user)
+  register({ dispatch }, user) {
     this.$fireAuth.createUserWithEmailAndPassword(user.email, user.password)
       .then((result) => {
-        console.log('新規登録成功', result)
         dispatch('note/loginAfterNoteClose', null, { root: true })
         dispatch('word/submitAnsweredWord', result.user.uid, { root: true })
-        console.log('updateProfile')
         result.user.updateProfile({
           displayName: user.name,
         })
-          .then((result) => {
-            console.log('名前設定完了', result)
+          .then(() => {
             dispatch('error/deleteErrorMessage', null, { root: true })
             dispatch('user/getUser', null, { root: true })
           })
           .catch((e) => {
             console.log('名前設定失敗', e.message)
+            dispatch('error/errorMessage', e, { root: true })
           })
       })
       .catch((e) => {

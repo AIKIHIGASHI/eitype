@@ -7,7 +7,7 @@
     {
         "name": "access",
         "a": "動詞／名詞",
-        "description": "アクセスする／アクセス"
+        "description": "アクセス"
     },
     {
         "name": "account",
@@ -82,7 +82,7 @@
     {
         "name": "base",
         "a": "形容詞／動詞",
-        "description": "ベースの、基底の／〜に基づく"
+        "description": "ベースの、基底の"
     },
     {
         "name": "bit",
@@ -97,7 +97,7 @@
     {
         "name": "block",
         "a": "名詞／動詞",
-        "description": "ブロック／ブロックする"
+        "description": "ブロック"
     },
     {
         "name": "boolean",
@@ -132,7 +132,7 @@
     {
         "name": "cancel",
         "a": "動詞",
-        "description": "キャンセルする、取り消す"
+        "description": "取り消す"
     },
     {
         "name": "capacity",
@@ -217,7 +217,7 @@
     {
         "name": "commit",
         "a": "動詞",
-        "description": "処理などを）確定する"
+        "description": "(処理などを)確定する"
     },
     {
         "name": "communication",
@@ -357,7 +357,7 @@
     {
         "name": "debug",
         "a": "動詞／名詞",
-        "description": "デバッグする／デバッグ"
+        "description": "デバッグ"
     },
     {
         "name": "default",
@@ -522,7 +522,7 @@
     {
         "name": "export",
         "a": "名詞／動詞",
-        "description": "エクスポート／エクスポートする"
+        "description": "エクスポート"
     },
     {
         "name": "express",
@@ -642,7 +642,7 @@
     {
         "name": "highlight",
         "a": "名詞／動詞",
-        "description": "ハイライト／強調表示する"
+        "description": "ハイライト"
     },
     {
         "name": "host",
@@ -667,7 +667,7 @@
     {
         "name": "import",
         "a": "名詞／動詞",
-        "description": "インポート／インポートする"
+        "description": "インポート"
     },
     {
         "name": "including",
@@ -732,7 +732,7 @@
     {
         "name": "label",
         "a": "名詞／動詞",
-        "description": "ラベル／ラベルを貼る"
+        "description": "ラベル"
     },
     {
         "name": "latest",
@@ -767,7 +767,7 @@
     {
         "name": "license",
         "a": "名詞／動詞",
-        "description": "ライセンス／ライセンス供与する"
+        "description": "ライセンス"
     },
     {
         "name": "limit",
@@ -917,7 +917,7 @@
     {
         "name": "override",
         "a": "動詞",
-        "description": "オーバーライドする、優先する"
+        "description": "優先する"
     },
     {
         "name": "owner",
@@ -937,7 +937,7 @@
     {
         "name": "parameter",
         "a": "名詞",
-        "description": "パラメーター、仮引数"
+        "description": "パラメーター"
     },
     {
         "name": "pass",
@@ -1002,7 +1002,7 @@
     {
         "name": "preview",
         "a": "名詞／動詞",
-        "description": "プレビュー／プレビューする"
+        "description": "プレビュー"
     },
     {
         "name": "previous",
@@ -1092,7 +1092,7 @@
     {
         "name": "record",
         "a": "動詞／名詞",
-        "description": "記録する／記録、レコード"
+        "description": "記録、レコード"
     },
     {
         "name": "refactor",
@@ -1137,7 +1137,7 @@
     {
         "name": "request",
         "a": "名詞／動詞",
-        "description": "要求、リクエスト／要求する"
+        "description": "リクエスト／要求する"
     },
     {
         "name": "require",
@@ -1207,7 +1207,7 @@
     {
         "name": "scan",
         "a": "動詞",
-        "description": "スキャンする、走査する"
+        "description": "スキャン"
     },
     {
         "name": "schedule",
@@ -1412,7 +1412,7 @@
     {
         "name": "type",
         "a": "名詞／動詞",
-        "description": "種類／（キーボードで）入力する"
+        "description": "種類／入力する"
     },
     {
         "name": "unable",
@@ -1452,7 +1452,7 @@
     {
         "name": "upload",
         "a": "動詞／名詞",
-        "description": "アップロードする／アップロード"
+        "description": "アップロード"
     },
     {
         "name": "value",
@@ -1472,7 +1472,7 @@
     {
         "name": "view",
         "a": "動詞／名詞",
-        "description": "表示する／表示、ビュー"
+        "description": "表示する／表示"
     },
     {
         "name": "warn",

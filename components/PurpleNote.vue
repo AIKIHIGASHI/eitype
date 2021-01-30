@@ -69,7 +69,7 @@
           <table>
             <tr v-for="score in beforeScores" :key="score.id">
               <td align="center">{{ score.rank }}位</td>
-              <td align="center">{{ score.name.slice(0, 7) }}</td>
+              <td align="center">{{ score.name.slice(0, 6) }}</td>
               <td align="center">{{ score.score }}点</td>
             </tr>
           </table>
@@ -88,7 +88,7 @@
           <table>
             <tr v-for="score in afterScores" :key="score.id">
               <td align="center">{{ score.rank }}位</td>
-              <td align="center">{{ score.name.slice(0, 7) }}</td>
+              <td align="center">{{ score.name.slice(0, 6) }}</td>
               <td align="center">{{ score.score }}点</td>
             </tr>
           </table>

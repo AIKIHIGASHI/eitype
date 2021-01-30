@@ -54,7 +54,6 @@ export const mutations = {
     state.myWordsBefore = []
     state.myWordsAfter = []
     state.myWords = []
-    console.log('deleteMyWords', state.myWords)
   },
   fusennClick(state, n) {
     state.fusenn[n - 1].bool = true
@@ -164,7 +163,6 @@ export const actions = {
   getMyWords({ commit, dispatch }, uid) {
     this.$firestore.collection('words').doc(uid).get()
       .then((docs) => {
-        console.log('【1】getMyWords成功')
         const words = []
         for (let i = 0; i < 300 + 1; i++) {
           if (docs.data().words[i] === undefined) {
@@ -183,12 +181,8 @@ export const actions = {
   deleteMyWords({ commit }) {
     commit('deleteMyWords')
   },
-  submitAnsweredWord({ commit, getters }, uid) {
-    if (!uid) {
-      console.log('ログインしていないのでワードを送信しません')
-      return
-    }
-    console.log('submitAnsweredWord')
+  submitAnsweredWord({ getters }, uid) {
+    if (!uid) return
     const answeredWords = getters.answeredWords
     const myWords = getters.myWords
     const words = []
@@ -197,28 +191,21 @@ export const actions = {
       for (let j = 0; j < myWords.length; j++) {
         if (myWords[j].word !== undefined) {
           if (answeredWords[i].answeredWord !== myWords[j].word) {
-            console.log(answeredWords[i].answeredWord, myWords[j].word, '違います')
           } else {
-            console.log(answeredWords[i].answeredWord, myWords[j].word, '同じです')
             flag = false
           }
         }
       }
       if (flag) {
-        console.log('違うのでpushします')
         words.push({
           word: answeredWords[i].answeredWord,
           description: answeredWords[i].description
         })
       }
     }
-    console.log('検索完了', words)
     this.$firestore.collection('words').doc(uid).set({words: this.$firebase.firestore.FieldValue.arrayUnion(...words)}, { merge: true })
-      .then(() => {
-        console.log('submitAnsweredWord成功')
-      })
       .catch((e) => {
-        console.log(e.message)
+        console.log('submitAnsweredWord失敗', e.message)
       })
   },
   fusennClick({ commit }, n) {
