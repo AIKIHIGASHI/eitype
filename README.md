@@ -10,21 +10,38 @@
 
 # 使用技術/開発環境
 
-## 使用PC
+### 使用PC
 - macOS Catalina 10.15.7
 
-## フロントエンド
+### フロントエンド
 - JavaScript
 - Nuxt.js
   - @nuxt/cli v2.14.7
   - npm 6.9.0
   - node v10.16.0
  
-## サーバーサイド
+### サーバーサイド
 - firebase
   - firestore
   - fireAuth
 - TwitterAPI
 
-## デプロイ
+### デプロイ
 - fire Hosting
+
+#機能一覧
+
+### ユーザー認証
+- 新規登録
+- ログイン
+- Twitterログイン
+- Googleログイン
+- ログアウト
+
+![demo](https://gyazo.com/48b5054dc59cbcdec6dd0250510136d2/raw)
+
+![demo](https://gyazo.com/3efb277687e2c194519d94416d38cb88/raw)
+
+### ランキング（ログイン後）
+
+
