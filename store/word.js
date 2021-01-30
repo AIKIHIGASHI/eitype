@@ -164,8 +164,7 @@ export const actions = {
   getMyWords({ commit, dispatch }, uid) {
     this.$firestore.collection('words').doc(uid).get()
       .then((docs) => {
-        // if (!docs.exists) return
-        console.log('【1】getMyWords成功', docs.data())
+        console.log('【1】getMyWords成功')
         const words = []
         for (let i = 0; i < 300 + 1; i++) {
           if (docs.data().words[i] === undefined) {
@@ -193,13 +192,6 @@ export const actions = {
     const answeredWords = getters.answeredWords
     const myWords = getters.myWords
     const words = []
-
-    // answeredWords.forEach((word) => {
-    //   words.push({
-    //     word: word.answeredWord,
-    //     description: word.description,
-    //   })
-    // })
     for (let i = 0; i < answeredWords.length; i++) {
       let flag = true
       for (let j = 0; j < myWords.length; j++) {

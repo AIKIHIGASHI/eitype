@@ -1,11 +1,13 @@
 export const state = () => ({
   score: 0,
+  scores: [],
   beforeScores: [],
   afterScores: [],
 })
 
 export const getters = {
   score: state => state.score,
+  scores: state => state.scores,
   beforeScores: state => state.beforeScores,
   afterScores: state => state.afterScores
 }
@@ -22,7 +24,7 @@ export const mutations = {
     // ランク同率時の処理
     let rank = 1
     let count = 0
-    for (let i = 0; i < scores.length - 1 ; i++) {
+    for (let i = 0; i < scores.length - 1; i++) {
       count++
       scores[i].rank = rank
       if (scores[i].score !== scores[i + 1].score) {
@@ -30,6 +32,7 @@ export const mutations = {
         count = 0
       }
     }
+    state.scores = scores
     state.beforeScores = scores.slice(0, 10)
     state.afterScores = scores.slice(10, 20)
   },
@@ -49,9 +52,23 @@ export const actions = {
     commit('resetScore')
   },
   // 合計スコアをfirestoreに保存する
-  submitScore({ commit }, score) {
+  submitScore({ commit, getters}, score) {
     if (score.name === 'ゲスト') {
       console.log('ログインしていないのでスコアを送信しません')
+      return
+    }
+    const scores = getters.scores
+    console.log(scores, score)
+    let flag = false
+    for (let i = 0; i < scores.length; i++) {
+      console.log(scores[i].score + '<=' + score.score)
+      if (scores[i].score <= score.score) {
+        flag = true
+        console.log(flag)
+      }
+    }
+    if (!flag) {
+      console.log('記録更新しないので送信しません')
       return
     }
     console.log('submitScore')
