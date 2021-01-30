@@ -1,7 +1,7 @@
 # README
 
 # 英単語タイピングゲーム「英タイプ」
-#### アプリURL:https://eitype-dc9f3.web.app/
+## アプリURL:https://eitype-dc9f3.web.app/
 
 ![demo](https://gyazo.com/fb6ee25520420caad3741199a6aa6932/raw)
 
