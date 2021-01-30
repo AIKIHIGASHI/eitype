@@ -45,18 +45,18 @@
 ![demo](https://gyazo.com/3efb277687e2c194519d94416d38cb88/raw)
 
 ## ランキング（ログイン後）
-### 上位２０位を表示
+### ・上位２０位を表示
 ![demo](https://gyazo.com/350b4a6b39f68df52673aa58890606b7/raw)
 
 ## 単語帳（ログイン後）
-### 計300単語
-### [プログラミング英語検定 英単語一覧のJSON](https://gist.github.com/ShinoharaTa/f967fab6a7fd6e0e289f5ce3d00f2060)を使用
-### ソート機能（登録順/アルファベット順）
+### ・計300単語
+### ・[プログラミング英語検定 英単語一覧のJSON](https://gist.github.com/ShinoharaTa/f967fab6a7fd6e0e289f5ce3d00f2060)を使用
+### ・ソート機能（登録順/アルファベット順）
 ![demo](https://gyazo.com/8a886b8937591dd878ff5ca30f45fa35/raw)
 
 ***
 
 ## その他機能
-### スコアのTwitterシェア
+### ・スコアのTwitterシェア
 
 
