@@ -16,15 +16,15 @@
 ## フロントエンド
 - JavaScript
 - Nuxt.js
- - @nuxt/cli v2.14.7
- - npm 6.9.0
- - node v10.16.0
+  - @nuxt/cli v2.14.7
+  - npm 6.9.0
+  - node v10.16.0
  
 ## サーバーサイド
 - firebase
- - firestore
- - fireAuth
+  - firestore
+  - fireAuth
 - TwitterAPI
 
 ## デプロイ
-fire Hosting
+- fire Hosting
