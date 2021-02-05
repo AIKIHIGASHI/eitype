@@ -14,7 +14,8 @@
     </div>
     <div class="type-box">
       <div class="type">
-        <span>{{ pressed }}<span style="color: white; opacity: 0.7;">{{ word }}</span></span>
+        <span>{{ pressed
+          }}<span style="color: white; opacity: 0.7">{{ word }}</span></span>
       </div>
     </div>
     <div class="next-word-box">Next : {{ newWords[index + 1].name }}</div>
@@ -51,7 +52,7 @@ export default {
     addEventListener('keydown', this.keyDown)
   },
   computed: {
-    ...mapGetters('word', ['jsonWords'])
+    ...mapGetters('word', ['jsonWords']),
   },
   methods: {
     ...mapActions('word', ['pushAnsweredWord', 'deleteAnsweredWord']),
@@ -73,7 +74,8 @@ export default {
         this.$router.push('/')
         return
       }
-      if (e.key !== this.word[0]) { // 間違えた時の処理
+      if (e.key !== this.word[0]) {
+        // 間違えた時の処理
         const wrong = new Audio(require('~/assets/sounds/wrong.mp3'))
         wrong.play()
         wrong.volume = 0.2
@@ -84,11 +86,12 @@ export default {
       const collect = new Audio(require('~/assets/sounds/collect.mp3'))
       collect.play()
       collect.volume = 0.3
-      this.chars.push({char: e.key, wrongChar: this.wrongChar})
+      this.chars.push({ char: e.key, wrongChar: this.wrongChar })
       this.wrongChar = false
       this.pressed += e.key
       this.word = this.word.slice(1)
-      if (this.word.length === 0) { // 文字を入力し終えたときの処理
+      if (this.word.length === 0) {
+        // 文字を入力し終えたときの処理
         if (this.correct) {
           this.incrementScore()
         }
@@ -96,7 +99,7 @@ export default {
           description: this.newWords[this.index].description,
           answeredWord: this.pressed,
           correct: this.correct,
-          chars: this.chars// : [{char: e.key, this.wrongChar: false}]
+          chars: this.chars, // : [{char: e.key, this.wrongChar: false}]
         })
         this.chars = []
         this.correct = true
@@ -142,8 +145,8 @@ export default {
           }
         }, 1000)
       })
-    }
-  }
+    },
+  },
 }
 </script>
 

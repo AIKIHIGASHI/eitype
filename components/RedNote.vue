@@ -1,33 +1,61 @@
 <template>
   <div>
     <div
-      :class="['note', {slide: redNote}, redNote ? classNames.noteTransitionB : classNames.noteTransitionA]">
+      :class="[
+        'note',
+        { slide: redNote },
+        redNote ? classNames.noteTransitionB : classNames.noteTransitionA,
+      ]">
       <span
-        :class="['cover', {open1: redNote}, redNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4]">
+        :class="[
+          'cover',
+          { open1: redNote },
+          redNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4,
+        ]">
         <h1>{{ title }}</h1>
         <div />
         <div />
       </span>
       <span
-        :class="['cover-back', {open2: redNote}, redNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4]"/>
+        :class="[
+          'cover-back',
+          { open2: redNote },
+          redNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4,
+        ]"/>
       <span
-        :class="['page1', {open3: redNote}, redNote ? classNames.pageTransitionB2 : classNames.pageTransitionA3]">
+        :class="[
+          'page1',
+          { open3: redNote },
+          redNote ? classNames.pageTransitionB2 : classNames.pageTransitionA3,
+        ]">
         <InThePage />
       </span>
       <span
-        :class="['page2', {open4: redNote}, redNote ? classNames.pageTransitionB3 : classNames.pageTransitionA2]">
+        :class="[
+          'page2',
+          { open4: redNote },
+          redNote ? classNames.pageTransitionB3 : classNames.pageTransitionA2,
+        ]">
         <InThePage />
       </span>
       <span
-        :class="['page3', {open5: redNote}, redNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1]">
+        :class="[
+          'page3',
+          { open5: redNote },
+          redNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1,
+        ]">
         <InThePage />
       </span>
       <span
-        :class="['page4' ,{open6: redNote}, redNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1]">
+        :class="[
+          'page4',
+          { open6: redNote },
+          redNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1,
+        ]">
         <div class="heading">遊び方</div>
         <div class="row">
           「
-          <span class="red">英タイプ</span>」は英単語学習型タイピングゲームです。
+          <span class="red">英タイプ</span>」は英単語タイピングゲームです。
         </div>
         <div class="row" />
         <div class="row">
@@ -55,8 +83,12 @@
         <div class="row">ゲーム終了後に採点結果が表示されます。</div>
       </span>
       <span
-        :class="['rear-cover', {rearCoverAfter: redNote}, redNote ? classNames.noteTransitionB : classNames.noteTransitionA]"/>
-      <div :class="['note-index', {noteShadowInset: redNote}]">
+        :class="[
+          'rear-cover',
+          { rearCoverAfter: redNote },
+          redNote ? classNames.noteTransitionB : classNames.noteTransitionA,
+        ]"/>
+      <div :class="['note-index', { noteShadowInset: redNote }]">
         <div class="close" @click="redNoteOpen()">閉じる</div>
         <div class="heading">ログイン後</div>
         <div class="row">ログイン後、以下の機能を使用できます。</div>
@@ -84,7 +116,11 @@
       </div>
       <div :class="['note-shadow']" />
       <div
-        :class="['note-shadow', {noteShadowSlide: redNote}, redNote ? classNames.pageTransitionB2 : classNames.noteTransitionA]"/>
+        :class="[
+          'note-shadow',
+          { noteShadowSlide: redNote },
+          redNote ? classNames.pageTransitionB2 : classNames.noteTransitionA,
+        ]"/>
     </div>
   </div>
 </template>
@@ -94,7 +130,7 @@ import { mapGetters, mapActions } from 'vuex'
 import InThePage from '~/components/InThePage.vue'
 export default {
   components: {
-    InThePage
+    InThePage,
   },
   data() {
     return {
@@ -109,8 +145,8 @@ export default {
         pageTransitionB1: 'page-transitionB1',
         pageTransitionB2: 'page-transitionB2',
         pageTransitionB3: 'page-transitionB3',
-        pageTransitionB4: 'page-transitionB4'
-      }
+        pageTransitionB4: 'page-transitionB4',
+      },
     }
   },
   computed: {
@@ -119,7 +155,7 @@ export default {
       'blueNote',
       'yellowNote',
       'greenNote',
-      'purpleNote'
+      'purpleNote',
     ]),
   },
   methods: {
@@ -128,9 +164,9 @@ export default {
       'blueNoteOpen',
       'yellowNoteOpen',
       'greenNoteOpen',
-      'purpleNoteOpen'
-    ])
-  }
+      'purpleNoteOpen',
+    ]),
+  },
 }
 </script>
 

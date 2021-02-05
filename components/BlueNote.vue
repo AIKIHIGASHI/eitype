@@ -1,65 +1,111 @@
 <template>
   <div>
     <div
-      :class="['note', {slide: blueNote}, blueNote ? className.noteTransitionB : className.noteTransitionA]">
+      :class="[
+        'note',
+        { slide: blueNote },
+        blueNote ? className.noteTransitionB : className.noteTransitionA,
+      ]">
       <span
-        :class="['cover', {open1: blueNote}, blueNote ? className.pageTransitionB1 : className.pageTransitionA4]">
+        :class="[
+          'cover',
+          { open1: blueNote },
+          blueNote ? className.pageTransitionB1 : className.pageTransitionA4,
+        ]">
         <h1>{{ title }}</h1>
-        <div/>
-        <div/>
+        <div />
+        <div />
       </span>
       <span
-        :class="['cover-back', {open2: blueNote}, blueNote ? className.pageTransitionB1 : className.pageTransitionA4]"/>
+        :class="[
+          'cover-back',
+          { open2: blueNote },
+          blueNote ? className.pageTransitionB1 : className.pageTransitionA4,
+        ]"/>
       <span
-        :class="['page1', {open3: blueNote}, blueNote ? className.pageTransitionB2 : className.pageTransitionA3]">
-        <InThePage/>
+        :class="[
+          'page1',
+          { open3: blueNote },
+          blueNote ? className.pageTransitionB2 : className.pageTransitionA3,
+        ]">
+        <InThePage />
       </span>
       <span
-        :class="['page2', {open4: blueNote}, blueNote ? className.pageTransitionB3 : className.pageTransitionA2]">
-        <InThePage/>
+        :class="[
+          'page2',
+          { open4: blueNote },
+          blueNote ? className.pageTransitionB3 : className.pageTransitionA2,
+        ]">
+        <InThePage />
       </span>
       <span
-        :class="['page3', {open5: blueNote}, blueNote ? className.pageTransitionB4 : className.pageTransitionA1]">
-        <InThePage/>
+        :class="[
+          'page3',
+          { open5: blueNote },
+          blueNote ? className.pageTransitionB4 : className.pageTransitionA1,
+        ]">
+        <InThePage />
       </span>
       <span
-        :class="['page4' ,{open6: blueNote}, blueNote ? className.pageTransitionB4 : className.pageTransitionA1]">
+        :class="[
+          'page4',
+          { open6: blueNote },
+          blueNote ? className.pageTransitionB4 : className.pageTransitionA1,
+        ]">
         <div class="heading">{{ title }}</div>
         <div class="error">{{ errorMessage }}</div>
         <form @submit="submit()">
           <div class="form-box">
             <div class="email">
-              <div><font-awesome-icon icon = "envelope" /> E-mail</div>
-              <input type="text" v-model="email">
+              <div><font-awesome-icon icon="envelope" /> E-mail</div>
+              <input type="text" v-model="email" >
             </div>
             <div class="password">
-              <div><font-awesome-icon icon = "lock" /> パスワード</div>
-              <input type="text" v-model="password">
+              <div><font-awesome-icon icon="lock" /> パスワード</div>
+              <input type="text" v-model="password" >
             </div>
-            <button class="not-submit" type="button" v-if="!email || !password">{{ title }}</button>
+            <button class="not-submit" type="button" v-if="!email || !password">
+              {{ title }}
+            </button>
             <button class="submit" type="submit" v-else>{{ title }}</button>
           </div>
         </form>
       </span>
       <span
-        :class="['rear-cover', {rearCoverAfter: blueNote}, blueNote ? className.noteTransitionB : className.noteTransitionA]"/>
-      <div :class="['note-index', {noteShadowInset: blueNote}]">
+        :class="[
+          'rear-cover',
+          { rearCoverAfter: blueNote },
+          blueNote ? className.noteTransitionB : className.noteTransitionA,
+        ]"/>
+      <div :class="['note-index', { noteShadowInset: blueNote }]">
         <div class="close" @click="blueNoteOpen()">閉じる</div>
         <div class="heading">&nbsp;</div>
-        <span class="shadow1" v-if="hover1"/>
-        <div class="twitter" @mouseover="hover1 = false" @mouseleave="hover1 = true" @click="twitterLogin()">
+        <span class="shadow1" v-if="hover1" />
+        <div
+          class="twitter"
+          @mouseover="hover1 = false"
+          @mouseleave="hover1 = true"
+          @click="twitterLogin()">
           <div>Twitterアカウントで</div>
           <div>{{ title }}</div>
         </div>
-        <span class="shadow2" v-if="hover2"/>
-        <div class="google" @mouseover="hover2 = false" @mouseleave="hover2 = true" @click="googleLogin()">
+        <span class="shadow2" v-if="hover2" />
+        <div
+          class="google"
+          @mouseover="hover2 = false"
+          @mouseleave="hover2 = true"
+          @click="googleLogin()">
           <div>Googleアカウントで</div>
           <div>{{ title }}</div>
         </div>
       </div>
-      <div :class="['note-shadow']"/>
+      <div :class="['note-shadow']" />
       <div
-        :class="['note-shadow', {noteShadowSlide: blueNote}, blueNote ? className.pageTransitionB2 : className.noteTransitionA]"/>
+        :class="[
+          'note-shadow',
+          { noteShadowSlide: blueNote },
+          blueNote ? className.pageTransitionB2 : className.noteTransitionA,
+        ]"/>
     </div>
   </div>
 </template>
@@ -69,7 +115,7 @@ import { mapGetters, mapActions } from 'vuex'
 import InThePage from '~/components/InThePage.vue'
 export default {
   components: {
-    InThePage
+    InThePage,
   },
   data() {
     return {
@@ -88,8 +134,8 @@ export default {
         pageTransitionB1: 'page-transitionB1',
         pageTransitionB2: 'page-transitionB2',
         pageTransitionB3: 'page-transitionB3',
-        pageTransitionB4: 'page-transitionB4'
-      }
+        pageTransitionB4: 'page-transitionB4',
+      },
     }
   },
   computed: {
@@ -98,11 +144,9 @@ export default {
       'blueNote',
       'yellowNote',
       'greenNote',
-      'purpleNote'
+      'purpleNote',
     ]),
-    ...mapGetters('error', [
-      'errorMessage'
-    ])
+    ...mapGetters('error', ['errorMessage']),
   },
   methods: {
     ...mapActions('note', [
@@ -110,18 +154,14 @@ export default {
       'blueNoteOpen',
       'yellowNoteOpen',
       'greenNoteOpen',
-      'purpleNoteOpen'
+      'purpleNoteOpen',
     ]),
-    ...mapActions('auth', [
-      'twitterLogin',
-      'googleLogin',
-      'login',
-    ]),
+    ...mapActions('auth', ['twitterLogin', 'googleLogin', 'login']),
     submit() {
       event.preventDefault()
-      this.login({email: this.email, password: this.password})
-    }
-  }
+      this.login({ email: this.email, password: this.password })
+    },
+  },
 }
 </script>
 
@@ -352,16 +392,16 @@ $backCoverColor: #5f8aff;
     }
   }
   .shadow1 {
-      width: 215px;
-      height: 70px;
-      background: rgb(255, 255, 255);
-      position: absolute;
-      top: 158px;
-      right: 62px;
-      box-shadow: 0 5px 5px #555;
-      transform: rotate(1deg);
-      z-index: 1px;
-    }
+    width: 215px;
+    height: 70px;
+    background: rgb(255, 255, 255);
+    position: absolute;
+    top: 158px;
+    right: 62px;
+    box-shadow: 0 5px 5px #555;
+    transform: rotate(1deg);
+    z-index: 1px;
+  }
   .twitter {
     width: 250px;
     height: 80px;
@@ -379,17 +419,16 @@ $backCoverColor: #5f8aff;
     }
   }
   .shadow2 {
-      width: 210px;
-      height: 70px;
-      background: rgb(255, 255, 255);
-      position: absolute;
-      top: 308px;
-      right: 62px;
-      box-shadow: 0 5px 5px #555;
-      transform: rotate(1deg);
-      z-index: 1px;
-
-    }
+    width: 210px;
+    height: 70px;
+    background: rgb(255, 255, 255);
+    position: absolute;
+    top: 308px;
+    right: 62px;
+    box-shadow: 0 5px 5px #555;
+    transform: rotate(1deg);
+    z-index: 1px;
+  }
   .google {
     margin: 0 auto;
     width: 250px;

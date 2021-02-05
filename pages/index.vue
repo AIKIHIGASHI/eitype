@@ -6,12 +6,15 @@
       :key="image.id"
       :class="['img' + index]">
       <div class="img-text">
-        <span :style="{ color: image.color }">{{ image.char }}<span style="color: white; opacity: 0.7;">{{ image.text }}</span></span>
+        <span :style="{ color: image.color }">{{ image.char
+          }}<span style="color: white; opacity: 0.7">{{
+            image.text
+          }}</span></span>
       </div>
       <img class="img" :src="image.src" >
     </div>
     <div class="logo">
-      <img src="~/assets/images/英タイプロゴ.png">
+      <img src="~/assets/images/英タイプロゴ.png" >
     </div>
     <div class="start-message">Enterでゲームスタート</div>
     <div
@@ -54,7 +57,7 @@
       ]">
       <purpleNote />
     </div>
-    <NoteListAfter v-if="user"/>
+    <NoteListAfter v-if="user" />
     <NoteListBefore v-else />
   </div>
 </template>
@@ -166,9 +169,7 @@ export default {
       'greenNote',
       'purpleNote',
     ]),
-    ...mapGetters('user', [
-      'user'
-    ]),
+    ...mapGetters('user', ['user']),
     shuffle() {
       const images = this.images
       for (let i = images.length - 1; i > 0; i--) {
@@ -176,31 +177,31 @@ export default {
         [images[j], images[i]] = [images[i], images[j]]
       }
       return images.slice(0, 3)
-    }
+    },
   },
   methods: {
-    ...mapActions('user', [
-      'getUser',
-      'logout'
-    ]),
-    ...mapActions('score', [
-      'getScore',
-      'deleteScores',
-      'resetScore'
-    ]),
+    ...mapActions('user', ['getUser', 'logout']),
+    ...mapActions('score', ['getScore', 'deleteScores', 'resetScore']),
     ...mapActions('word', [
       'getMyWords',
       'deleteMyWords',
-      'deleteAnsweredWord'
+      'deleteAnsweredWord',
     ]),
     play(e) {
-      if (this.redNote || this.blueNote || this.yellowNote || this.greenNote || this.purpleNote) return
+      if (
+        this.redNote ||
+        this.blueNote ||
+        this.yellowNote ||
+        this.greenNote ||
+        this.purpleNote
+      )
+        return
       if (e.key === 'Enter') {
         this.$store.commit('audio/chime1Play')
         removeEventListener('keydown', this.play)
         this.$router.push('/play')
       }
-    }
+    },
   },
 }
 </script>

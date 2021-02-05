@@ -1,61 +1,111 @@
 <template>
   <div>
     <div
-      :class="['note', {slide: greenNote}, greenNote ? classNames.noteTransitionB : classNames.noteTransitionA]">
+      :class="[
+        'note',
+        { slide: greenNote },
+        greenNote ? classNames.noteTransitionB : classNames.noteTransitionA,
+      ]">
       <span
-        :class="['cover', {open1: greenNote}, greenNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4]">
+        :class="[
+          'cover',
+          { open1: greenNote },
+          greenNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4,
+        ]">
         <h1>{{ title }}</h1>
         <div />
         <div />
       </span>
       <span
-        :class="['cover-back', {open2: greenNote}, greenNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4]"/>
+        :class="[
+          'cover-back',
+          { open2: greenNote },
+          greenNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4,
+        ]"/>
       <span
-        :class="['page1', {open3: greenNote}, greenNote ? classNames.pageTransitionB2 : classNames.pageTransitionA3]">
+        :class="[
+          'page1',
+          { open3: greenNote },
+          greenNote ? classNames.pageTransitionB2 : classNames.pageTransitionA3,
+        ]">
         <InThePage />
       </span>
       <span
-        :class="['page2', {open4: greenNote}, greenNote ? classNames.pageTransitionB3 : classNames.pageTransitionA2]">
+        :class="[
+          'page2',
+          { open4: greenNote },
+          greenNote ? classNames.pageTransitionB3 : classNames.pageTransitionA2,
+        ]">
         <InThePage />
       </span>
       <span
-        :class="['page3', {open5: greenNote}, greenNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1]">
+        :class="[
+          'page3',
+          { open5: greenNote },
+          greenNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1,
+        ]">
         <InThePage />
       </span>
       <span
-        :class="['page4' ,{open6: greenNote}, greenNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1]">
-        <div class="heading">{{title}}</div>
+        :class="[
+          'page4',
+          { open6: greenNote },
+          greenNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1,
+        ]">
+        <div class="heading">{{ title }}</div>
         <div class="table-box">
           <table v-if="myWordsBefore">
             <tr v-for="myWord in myWordsBefore" :key="myWord.id">
-              <td align="center">{{myWord.word}}</td>
-              <td align="center" style="font-size: 13px;">{{myWord.description}}</td>
+              <td align="center">{{ myWord.word }}</td>
+              <td align="center" style="font-size: 13px">
+                {{ myWord.description }}
+              </td>
             </tr>
           </table>
         </div>
       </span>
       <span
-        :class="['rear-cover', {rearCoverAfter: greenNote}, greenNote ? classNames.noteTransitionB : classNames.noteTransitionA]"/>
-      <div :class="['note-index', {noteShadowInset: greenNote}]">
+        :class="[
+          'rear-cover',
+          { rearCoverAfter: greenNote },
+          greenNote ? classNames.noteTransitionB : classNames.noteTransitionA,
+        ]"/>
+      <div :class="['note-index', { noteShadowInset: greenNote }]">
         <div class="close" @click="greenNoteOpen()">閉じる</div>
-        <div class="close sort" @click="sortToggle()" style="width: 120px;" v-if="sort">アルファベット順</div>
+        <div
+          class="close sort"
+          @click="sortToggle()"
+          style="width: 120px"
+          v-if="sort">
+          アルファベット順
+        </div>
         <div class="close sort" @click="sortToggle()" v-else>登録順</div>
         <div class="heading">&nbsp;</div>
         <div class="table-box">
           <table>
             <tr v-for="myWord in myWordsAfter" :key="myWord.id">
-              <td align="center">{{myWord.word}}</td>
-              <td align="center" style="font-size: 13px;">{{myWord.description}}</td>
+              <td align="center">{{ myWord.word }}</td>
+              <td align="center" style="font-size: 13px">
+                {{ myWord.description }}
+              </td>
             </tr>
           </table>
         </div>
       </div>
       <div class="fusenn-box">
-        <div v-for="n in 15" :key="n" :class="['fusenn' + n, {width: fusenn[n - 1].bool}]" @click="fusennClick(n)"/>
+        <div
+          v-for="n in 15"
+          :key="n"
+          :class="['fusenn' + n, { width: fusenn[n - 1].bool }]"
+          @click="fusennClick(n)"/>
       </div>
       <div :class="['note-shadow']" />
       <div
-        :class="['note-shadow', {noteShadowSlide: greenNote}, greenNote ? classNames.pageTransitionB2 : classNames.noteTransitionA]"/>
+        :class="[
+          'note-shadow',
+          { noteShadowSlide: greenNote },
+          greenNote ? classNames.pageTransitionB2 : classNames.noteTransitionA,
+        ]"/>
     </div>
   </div>
 </template>
@@ -65,7 +115,7 @@ import { mapGetters, mapActions } from 'vuex'
 import InThePage from '~/components/InThePage.vue'
 export default {
   components: {
-    InThePage
+    InThePage,
   },
   data() {
     return {
@@ -80,7 +130,7 @@ export default {
         pageTransitionB1: 'page-transitionB1',
         pageTransitionB2: 'page-transitionB2',
         pageTransitionB3: 'page-transitionB3',
-        pageTransitionB4: 'page-transitionB4'
+        pageTransitionB4: 'page-transitionB4',
       },
     }
   },
@@ -90,7 +140,7 @@ export default {
       'blueNote',
       'yellowNote',
       'greenNote',
-      'purpleNote'
+      'purpleNote',
     ]),
     ...mapGetters('word', [
       'jsonWords',
@@ -98,7 +148,7 @@ export default {
       'myWordsBefore',
       'myWordsAfter',
       'fusenn',
-      'sort'
+      'sort',
     ]),
   },
   methods: {
@@ -109,11 +159,8 @@ export default {
       'greenNoteOpen',
       'purpleNoteOpen',
     ]),
-    ...mapActions('word', [
-      'fusennClick',
-      'sortToggle'
-    ]),
-  }
+    ...mapActions('word', ['fusennClick', 'sortToggle']),
+  },
 }
 </script>
 
@@ -148,8 +195,8 @@ export default {
 }
 
 $thickness: rgb(231, 231, 231);
-$coverColor: #9BFFAE;
-$backCoverColor: #39E073;
+$coverColor: #9bffae;
+$backCoverColor: #39e073;
 
 .fusenn-box {
   width: 90px;
@@ -377,7 +424,7 @@ $backCoverColor: #39E073;
     color: #93c5d8;
   }
   .sort {
-    top: 45px
+    top: 45px;
   }
 }
 

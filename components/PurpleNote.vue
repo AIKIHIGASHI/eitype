@@ -137,10 +137,7 @@ export default {
       'greenNote',
       'purpleNote',
     ]),
-    ...mapGetters('score', [
-      'beforeScores',
-      'afterScores'
-    ]),
+    ...mapGetters('score', ['beforeScores', 'afterScores']),
   },
   methods: {
     ...mapActions('note', [
