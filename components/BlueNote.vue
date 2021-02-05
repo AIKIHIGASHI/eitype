@@ -4,13 +4,13 @@
       :class="[
         'note',
         { slide: blueNote },
-        blueNote ? className.noteTransitionB : className.noteTransitionA,
+        blueNote ? classNames.noteTransitionB : classNames.noteTransitionA,
       ]">
       <span
         :class="[
           'cover',
           { open1: blueNote },
-          blueNote ? className.pageTransitionB1 : className.pageTransitionA4,
+          blueNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4,
         ]">
         <h1>{{ title }}</h1>
         <div />
@@ -20,13 +20,13 @@
         :class="[
           'cover-back',
           { open2: blueNote },
-          blueNote ? className.pageTransitionB1 : className.pageTransitionA4,
+          blueNote ? classNames.pageTransitionB1 : classNames.pageTransitionA4,
         ]"/>
       <span
         :class="[
           'page1',
           { open3: blueNote },
-          blueNote ? className.pageTransitionB2 : className.pageTransitionA3,
+          blueNote ? classNames.pageTransitionB2 : classNames.pageTransitionA3,
         ]">
         <InThePage />
       </span>
@@ -34,7 +34,7 @@
         :class="[
           'page2',
           { open4: blueNote },
-          blueNote ? className.pageTransitionB3 : className.pageTransitionA2,
+          blueNote ? classNames.pageTransitionB3 : classNames.pageTransitionA2,
         ]">
         <InThePage />
       </span>
@@ -42,7 +42,7 @@
         :class="[
           'page3',
           { open5: blueNote },
-          blueNote ? className.pageTransitionB4 : className.pageTransitionA1,
+          blueNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1,
         ]">
         <InThePage />
       </span>
@@ -50,7 +50,7 @@
         :class="[
           'page4',
           { open6: blueNote },
-          blueNote ? className.pageTransitionB4 : className.pageTransitionA1,
+          blueNote ? classNames.pageTransitionB4 : classNames.pageTransitionA1,
         ]">
         <div class="heading">{{ title }}</div>
         <div class="error">{{ errorMessage }}</div>
@@ -75,7 +75,7 @@
         :class="[
           'rear-cover',
           { rearCoverAfter: blueNote },
-          blueNote ? className.noteTransitionB : className.noteTransitionA,
+          blueNote ? classNames.noteTransitionB : classNames.noteTransitionA,
         ]"/>
       <div :class="['note-index', { noteShadowInset: blueNote }]">
         <div class="close" @click="blueNoteOpen()">閉じる</div>
@@ -104,7 +104,7 @@
         :class="[
           'note-shadow',
           { noteShadowSlide: blueNote },
-          blueNote ? className.pageTransitionB2 : className.noteTransitionA,
+          blueNote ? classNames.pageTransitionB2 : classNames.noteTransitionA,
         ]"/>
     </div>
   </div>
@@ -112,8 +112,11 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { mapNote } from '~/mixins/mapNote.js'
+import { classNames } from '~/mixins/classNames.js'
 import InThePage from '~/components/InThePage.vue'
 export default {
+  mixins: [mapNote, classNames],
   components: {
     InThePage,
   },
@@ -124,38 +127,12 @@ export default {
       hover2: true,
       email: '',
       password: '',
-      className: {
-        noteTransitionA: 'note-transitionA',
-        noteTransitionB: 'note-transitionB',
-        pageTransitionA1: 'page-transitionA1',
-        pageTransitionA2: 'page-transitionA2',
-        pageTransitionA3: 'page-transitionA3',
-        pageTransitionA4: 'page-transitionA4',
-        pageTransitionB1: 'page-transitionB1',
-        pageTransitionB2: 'page-transitionB2',
-        pageTransitionB3: 'page-transitionB3',
-        pageTransitionB4: 'page-transitionB4',
-      },
     }
   },
   computed: {
-    ...mapGetters('note', [
-      'redNote',
-      'blueNote',
-      'yellowNote',
-      'greenNote',
-      'purpleNote',
-    ]),
     ...mapGetters('error', ['errorMessage']),
   },
   methods: {
-    ...mapActions('note', [
-      'redNoteOpen',
-      'blueNoteOpen',
-      'yellowNoteOpen',
-      'greenNoteOpen',
-      'purpleNoteOpen',
-    ]),
     ...mapActions('auth', ['twitterLogin', 'googleLogin', 'login']),
     submit() {
       event.preventDefault()

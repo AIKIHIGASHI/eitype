@@ -112,36 +112,20 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { mapNote } from '~/mixins/mapNote.js'
+import { classNames } from '~/mixins/classNames.js'
 import InThePage from '~/components/InThePage.vue'
 export default {
+  mixins: [mapNote, classNames],
   components: {
     InThePage,
   },
   data() {
     return {
       title: '単語帳',
-      classNames: {
-        noteTransitionA: 'note-transitionA',
-        noteTransitionB: 'note-transitionB',
-        pageTransitionA1: 'page-transitionA1',
-        pageTransitionA2: 'page-transitionA2',
-        pageTransitionA3: 'page-transitionA3',
-        pageTransitionA4: 'page-transitionA4',
-        pageTransitionB1: 'page-transitionB1',
-        pageTransitionB2: 'page-transitionB2',
-        pageTransitionB3: 'page-transitionB3',
-        pageTransitionB4: 'page-transitionB4',
-      },
     }
   },
   computed: {
-    ...mapGetters('note', [
-      'redNote',
-      'blueNote',
-      'yellowNote',
-      'greenNote',
-      'purpleNote',
-    ]),
     ...mapGetters('word', [
       'jsonWords',
       'myWords',
@@ -152,13 +136,6 @@ export default {
     ]),
   },
   methods: {
-    ...mapActions('note', [
-      'redNoteOpen',
-      'blueNoteOpen',
-      'yellowNoteOpen',
-      'greenNoteOpen',
-      'purpleNoteOpen',
-    ]),
     ...mapActions('word', ['fusennClick', 'sortToggle']),
   },
 }
