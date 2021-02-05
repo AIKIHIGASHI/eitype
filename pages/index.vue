@@ -150,6 +150,8 @@ export default {
     }
   },
   created() {
+    this.deleteAnsweredWord()
+    this.resetScore()
     this.deleteScores()
     this.deleteMyWords()
     this.getScore()
@@ -183,11 +185,13 @@ export default {
     ]),
     ...mapActions('score', [
       'getScore',
-      'deleteScores'
+      'deleteScores',
+      'resetScore'
     ]),
     ...mapActions('word', [
       'getMyWords',
-      'deleteMyWords'
+      'deleteMyWords',
+      'deleteAnsweredWord'
     ]),
     play(e) {
       if (this.redNote || this.blueNote || this.yellowNote || this.greenNote || this.purpleNote) return

@@ -54,8 +54,8 @@ export default {
     ...mapGetters('word', ['jsonWords'])
   },
   methods: {
-    ...mapActions('word', ['pushAnsweredWord', ]),
-    ...mapActions('score', ['incrementScore', ]),
+    ...mapActions('word', ['pushAnsweredWord', 'deleteAnsweredWord']),
+    ...mapActions('score', ['incrementScore', 'resetScore']),
     shuffle() {
       const words = this.jsonWords
       for (let i = words.length - 1; i > 0; i--) {
@@ -68,6 +68,8 @@ export default {
       if (e.key === 'Escape') {
         removeEventListener('keydown', this.keyDown)
         clearInterval(this.id)
+        this.deleteAnsweredWord()
+        this.resetScore()
         this.$router.push('/')
         return
       }
@@ -75,7 +77,6 @@ export default {
         const wrong = new Audio(require('~/assets/sounds/wrong.mp3'))
         wrong.play()
         wrong.volume = 0.2
-        console.log(e.key, '間違えました')
         this.correct = false
         this.wrongChar = true
         return
