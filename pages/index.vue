@@ -64,8 +64,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { images } from '~/mixins/images.js'
-import { mapNote } from '~/mixins/mapNote.js'
 import RedNote from '~/components/RedNote.vue'
 import BlueNote from '~/components/BlueNote.vue'
 import YellowNote from '~/components/YellowNote.vue'
@@ -74,7 +72,6 @@ import PurpleNote from '~/components/PurpleNote.vue'
 import NoteListBefore from '~/components/NoteListBefore.vue'
 import NoteListAfter from '~/components/NoteListAfter.vue'
 export default {
-  mixins: [images, mapNote],
   components: {
     RedNote,
     BlueNote,
@@ -86,7 +83,73 @@ export default {
   },
   data() {
     return {
-      a: 'a'
+      images: [
+        {
+          src: require('~/assets/images/apple.png'),
+          char: 'a',
+          text: 'pple',
+          color: '#FF9595',
+        },
+        {
+          src: require('~/assets/images/dog.png'),
+          char: 'd',
+          text: 'og',
+          color: '#FF7622',
+        },
+        {
+          src: require('~/assets/images/hospital.png'),
+          char: 'h',
+          text: 'ospital',
+          color: 'skyblue',
+        },
+        {
+          src: require('~/assets/images/boy.png'),
+          char: 'b',
+          text: 'oy',
+          color: 'skyblue',
+        },
+        {
+          src: require('~/assets/images/girl.png'),
+          char: 'g',
+          text: 'irl',
+          color: '#FF9595',
+        },
+        {
+          src: require('~/assets/images/cat.png'),
+          char: 'c',
+          text: 'at',
+          color: '#FF7622',
+        },
+        {
+          src: require('~/assets/images/turtle.png'),
+          char: 't',
+          text: 'urtle',
+          color: 'lightgreen',
+        },
+        {
+          src: require('~/assets/images/coffee.png'),
+          char: 'c',
+          text: 'offee',
+          color: '#FF7622',
+        },
+        {
+          src: require('~/assets/images/banana.png'),
+          char: 'b',
+          text: 'anana',
+          color: 'yellow',
+        },
+        {
+          src: require('~/assets/images/chair.png'),
+          char: 'c',
+          text: 'hair',
+          color: 'yellow',
+        },
+      ],
+      classNames: {
+        downNoteTransition: 'down-note-transition',
+        downMiniNote: 'down-mini-note-transition',
+        downMiniNote2: 'down-mini-note-transition2',
+      },
     }
   },
   created() {
@@ -100,6 +163,13 @@ export default {
   },
   computed: {
     ...mapGetters('user', ['user']),
+    ...mapGetters('note', [
+      'redNote',
+      'blueNote',
+      'yellowNote',
+      'greenNote',
+      'purpleNote',
+    ]),
     shuffle() {
       const images = this.images
       for (let i = images.length - 1; i > 0; i--) {
@@ -116,6 +186,13 @@ export default {
       'getMyWords',
       'deleteMyWords',
       'deleteAnsweredWord',
+    ]),
+    ...mapActions('note', [
+      'redNoteOpen',
+      'blueNoteOpen',
+      'yellowNoteOpen',
+      'greenNoteOpen',
+      'purpleNoteOpen',
     ]),
     play(e) {
       if (

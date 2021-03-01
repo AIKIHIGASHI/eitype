@@ -23,7 +23,7 @@ export default {
 
 <style lang="scss" >
 html {
-  font-family: "MS Pゴシック", "Wawati SC", "Comic Sans MS", "Source Sans Pro",
+  font-family: "Wawati SC", "MS Pゴシック", "Comic Sans MS", "Source Sans Pro",
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
     Arial, sans-serif;
   font-size: 16px;
